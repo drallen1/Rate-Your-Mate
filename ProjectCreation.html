@@ -1,0 +1,53 @@
+
+<HTML>
+<HEAD>
+<TITLE>Project Creation</TITLE>
+
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/ui/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/ui/jquery.ui.core.js"></script>
+<link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.16.custom.css"/>
+
+</HEAD>
+<BODY>
+
+<form action="welcome.php" method="post">
+<fieldset>
+<legend>Project Creation</legend>
+Project Name: <input type="text" name="ProjectName" /></br>
+Number of Groups: <input type="text" name="NumGroups" /></br>
+Grade:<input type="text" name="Grade" /></br>
+Who will create the contract? <input type="radio" name="sex" value="Instructor" /> Instructor
+<input type="radio" name="evaluation" value="Student" /> Student</br>
+Who is being evaluated? <input type="radio" name="sex" value="Evaluator" /> Evaluator 
+<input type="radio" name="evaluation" value="Evaluatee" /> Evaluatee
+<input type="radio" name="evaluation" value="Both" /> Both
+<input type="radio" name="evaluation" value="None" /> None </br>
+Due Date Enabled: <input type="checkbox" name="due" value="dueDateEnabled" /> <br />
+Late Submissions Allowed: <input type="checkbox" name="lateSub" value="lateSubEnabled" /></br>
+
+<script>
+$(function()
+	{
+	$( "#datepicker" ).datepicker();
+	$( "#datepicker2" ).datepicker();
+	}
+);
+</script>
+
+Do you want to have multiple evaluations? <input type="radio" name="multEvals" value="yes" /> Yes
+<input type="radio" name="multEvals" value="no" /> No</br>
+How many?<input type="text" name="numberOfEvals" />
+
+<div class="demo">
+<p>Date Available From: <input id="datepicker" type="text" value="Click Here"></p>
+<p>Date Disabled From: <input id="datepicker2" type="text" value="Click Here"></p>
+</div>
+
+</fieldset>
+<input type="submit" />
+</form>
+
+</BODY>
+</HTML>

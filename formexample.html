@@ -1,0 +1,32 @@
+<html>
+	<head>
+	<title>Funny cat pictures</title>
+	</head>
+	<body>
+		<p>This website is all about funny cats and pictures.</p>
+
+	<form action="process.php" method="POST">
+	Name: <input name="name" type="text" /> </br>		
+	Email: <input name="email" type="text" /> </br>		
+	Comments: <textarea name="comments" rows="5" cols="50"></textarea> </br>
+
+	Opt into newsletter <input name="newsletter" type="checkbox" value="true" checked="checked"/>	</br>
+	Cats <input type="radio" name="cats_dogs" value="cats"/>
+	Dogs <input type="radio" name="cats_dogs" value="dogs"/>
+	Other <input type="radio" name="other" value="other"/>
+	<select name="subject">
+		<option value="love">Love it</option>
+
+		<option value="hate it" selected="selected">Hate it</option>
+	</select>
+	<input type="submit" value="Send!"/>
+	</form>
+<ul>
+<li><a href ="index.php">Home</a></li><li><a href ="hatedogs.php">Hate Dogs</a></li><li><a href ="adopt.php">Adopt</a></li><li><a href ="contact.php">Contact</a></li></ul>
+	
+	
+
+</body>
+
+</html>
+
