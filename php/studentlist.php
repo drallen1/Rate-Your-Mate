@@ -6,6 +6,7 @@ if (!link){
       die('Error connecting to the database.');
 }
 $query = "SELECT * FROM Students";
+echo '<FORM METHOD="POST" ACTION="removestudent.php">';
 $result = mysql_query($query) or die(mysql_error());
 echo "<table border=1px cellspacing=3px>
 <th>Add to Group</th>
@@ -15,7 +16,7 @@ echo "<table border=1px cellspacing=3px>
 while($row=mysql_fetch_array($result)){
 echo <<<HTML
 <tr>
-<td><input type="checkbox" name="{$row['STUDENT_ID']}" />
+<td><input type="checkbox" name="students_to_delete[]" value="{$row['STUDENT_ID']}" />
 <select name="select1" size="1" >
 <option>Group 1</option>
 <option>Group 2</option>
@@ -43,7 +44,6 @@ HTML;
 }
 echo "</table>";
 echo <<<HTML
-<FORM METHOD="LINK" ACTION="removestudent.php">
 <INPUT TYPE="submit" VALUE="Delete Selected Students">
 </FORM>
 HTML;
