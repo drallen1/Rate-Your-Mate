@@ -3,14 +3,50 @@ $server = 'turing.plymouth.edu';
 $link = mysql_connect($server, 'drallen1' , 'unicode' );
 mysql_select_db("drallen1", $link);
 if (!link){
-	die('Error connecting to the database.');
+      die('Error connecting to the database.');
 }
-$STUDENT_ID=$_POST['STUDENT_ID'];
-$FName=$_POST['FName'];
-$LName=$_POST['LName'];
-
-$query = "INSERT INTO Students(STUDENT_ID,FName,LName) values ('$STUDENT_ID','$FName','$LName')";
-$result = mysql_query($query) or die(mysql_error()); 
-echo "Student <strong>$LName, $FName</strong> added successfully."
+$query = "SELECT * FROM Students";
+$result = mysql_query($query) or die(mysql_error());
+echo "<table border=1px cellspacing=3px>
+<th>Add to Group</th>
+<th>Student ID</th>
+<th>First Name</th>
+<th>Last Name</th>";
+while($row=mysql_fetch_array($result)){
+echo <<<HTML
+<tr>
+<td><input type="checkbox" name="{$row['STUDENT_ID']}" />
+<select name="select1" size="1" >
+<option>Group 1</option>
+<option>Group 2</option>
+<option>Group 3</option>
+</select>
+<td>{$row['STUDENT_ID']}</td>
+<td>{$row['FName']}</td>
+<td>{$row['LName']} </td>
+</tr>
+HTML;
+}
+echo "</table>";
+$query = "SELECT * FROM Groups";
+echo "<table border=1px cellspacing=3px>
+<th>GROUP_ID</th>
+<th>Group Name</th>";
+$result = mysql_query($query) or die(mysql_error());
+while($row=mysql_fetch_array($result)){
+echo <<<HTML
+<tr>
+<td>{$row['GROUP_ID']}</td>
+<td>{$row['GroupName']}</td>
+</tr>
+HTML;
+}
+echo "</table>";
+echo <<<HTML
+<FORM METHOD="LINK" ACTION="removestudent.php">
+<INPUT TYPE="submit" VALUE="Delete Selected Students">
+</FORM>
+HTML;
 ?>
 
+$result = mysql_query($query) or die(mysql_error());
