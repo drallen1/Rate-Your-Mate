@@ -9,7 +9,7 @@ $query = "SELECT * FROM Students";
 echo '<FORM METHOD="POST" ACTION="removestudent.php">';
 $result = mysql_query($query) or die(mysql_error());
 echo "<table border=1px cellspacing=3px>
-<th>Add to Group</th>
+<th>Select</th>
 <th>Student ID</th>
 <th>First Name</th>
 <th>Last Name</th>";
@@ -17,11 +17,12 @@ while($row=mysql_fetch_array($result)){
 echo <<<HTML
 <tr>
 <td><input type="checkbox" name="students_to_delete[]" value="{$row['STUDENT_ID']}" />
+<!--
 <select name="select1" size="1" >
 <option>Group 1</option>
 <option>Group 2</option>
 <option>Group 3</option>
-</select>
+</select>-->
 <td>{$row['STUDENT_ID']}</td>
 <td>{$row['FName']}</td>
 <td>{$row['LName']} </td>
@@ -49,4 +50,3 @@ echo <<<HTML
 HTML;
 ?>
 
-$result = mysql_query($query) or die(mysql_error());
