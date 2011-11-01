@@ -5,7 +5,9 @@ mysql_select_db("drallen1", $link);
 if (!link){
       die('Error connecting to the database.');
 }
-$query = "SELECT s.*, g.* FROM Students s, Groups g WHERE s.group_id=g.group_id ORDER BY s.group_id";
+//$query = "SELECT s.*, g.* FROM Students s, Groups g WHERE (s.group_id=g.group_id OR s.group_id=NULL) ORDER BY s.group_id";
+$query="SELECT s.*, g.* FROM Students s LEFT JOIN Groups g ON s.group_id=g.group_id ORDER BY s.group_id";
+
 echo '<FORM METHOD="POST" ACTION="addstudenttogroup".php">';
 $result = mysql_query($query) or die(mysql_error());
 echo "<table border=1px cellspacing=3px>
@@ -22,9 +24,15 @@ echo <<<HTML
 <td>{$row['STUDENT_ID']}</td>
 <td>{$row['FName']}</td>
 <td>{$row['LName']} </td>
-<td>{$row['GroupName']} </td>
-</tr>
+<td>
 HTML;
+if($row['GroupName'] == NULL)
+{
+  echo '<p style = "color:red">No Group</p>';
+}else{
+ echo $row['GroupName'] . " </td>";
+}
+echo "</tr>";
 }
 echo '</table>';
 

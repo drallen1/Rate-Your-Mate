@@ -15,6 +15,6 @@ foreach($_POST['students_to_add'] as $student_id)
   $data2 = mysql_fetch_row($result2);
   $query = "UPDATE Students SET GROUP_ID =" . $data2[0] . " WHERE STUDENT_ID=" . mysql_real_escape_string($student_id);
   $result = mysql_query($query) or die(mysql_error());
-  echo "Student <strong>" .$data[0] . ", " . $data[1] . "</strong> added to group " . $data2[0] . " successfully. <br>";
+  echo "Student <strong>" .$data[0] . ", " . $data[1] . "</strong> added to " . $_POST['GroupName']. " successfully. <br>";
 }
 ?>
