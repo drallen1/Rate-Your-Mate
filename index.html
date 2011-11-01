@@ -12,16 +12,6 @@
 <link rel="stylesheet" href="css/text.css" />
 <link rel="stylesheet" href="css/960_24_col.css" />
 <link rel="stylesheet" href="css/demo.css" />
-<script>
-  $(document).ready(function() {
-     $( "#datepicker" ).datepicker();
-	 $( "#test" ).click(function(){
-	 $( "#iframe" ).attr("src","php/studentlist.php");
-	 });
-	 });
-	 
-  
-</script>
 </head>
 <body>
 <h1>
@@ -53,7 +43,7 @@
 	<a href="ProjectCreation.html" target="home">Project Creation</a><br>
     <a href="student.html" target="home">Student Add</a><br>
     <a href="creategroup.html" target="home">Group Creation</a><br>
-    <a href="home.html" target="home">Contract Creation</a><br>
+    <a href="contractcreation.html" target="home">Contract Creation</a><br>
     <a href="php/studentlist.php" target="home">Student List</a><br> 
     <a href="php/studentlistgroup.php" target="home">Student Group Add</a><br>
 	</p>
@@ -61,8 +51,6 @@
   <!-- end .grid_3 -->
   <div class="grid_21">
     <p>
-		<button id="test">Student List</button>
-   Date:  <input id="datepicker" type="text">
     <iframe src="student.html" id="iframe" name="home" width="100%" height="700"></iframe>
     </p>
   </div>
