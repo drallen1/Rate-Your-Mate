@@ -1,3 +1,6 @@
+<? include('includes/header.php'); 
+if($session->userlevel >=8){
+?>
 <html>
 	<head>
 		<title>Add Student</title>
@@ -16,3 +19,8 @@
 		<in
 	</body>
 </html>
+<?
+}else{
+echo "You do not have access to this page.";
+}
+?>

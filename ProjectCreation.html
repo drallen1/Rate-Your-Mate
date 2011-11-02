@@ -1,53 +1,59 @@
+<? include('includes/header.php'); 
 
-<HTML>
-<HEAD>
-<TITLE>Project Creation</TITLE>
+if($session->userlevel >=8){?>
 
-<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
-<script type="text/javascript" src="js/ui/jquery-ui.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="js/ui/jquery.ui.core.js"></script>
-<link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.16.custom.css"/>
-
-</HEAD>
-<BODY>
-
-<form action="welcome.php" method="post">
+<form action="php/projectcreation.php" method="post">
 <fieldset>
 <legend>Project Creation</legend>
+
 Project Name: <input type="text" name="ProjectName" /></br>
+
 Number of Groups: <input type="text" name="NumGroups" /></br>
+
 Grade:<input type="text" name="Grade" /></br>
-Who will create the contract? <input type="radio" name="sex" value="Instructor" /> Instructor
-<input type="radio" name="evaluation" value="Student" /> Student</br>
-Who is being evaluated? <input type="radio" name="sex" value="Evaluator" /> Evaluator 
-<input type="radio" name="evaluation" value="Evaluatee" /> Evaluatee
-<input type="radio" name="evaluation" value="Both" /> Both
-<input type="radio" name="evaluation" value="None" /> None </br>
-Due Date Enabled: <input type="checkbox" name="due" value="dueDateEnabled" /> <br />
-Late Submissions Allowed: <input type="checkbox" name="lateSub" value="lateSubEnabled" /></br>
+
+Who will create the contract? <input type="radio" name="Who" value="1" /> Instructor
+<input type="radio" name="Who" value="0" /> Student</br>
+
+Who is being evaluated? <input type="radio" name="GradeSubmit" value="1" /> Evaluator 
+<input type="radio" name="GradeSubmit" value="0" /> Evaluatee
+<input type="radio" name="GradeSubmit" value="2" /> Both
+<input type="radio" name="GradeSubmit" value="3" /> None </br>
+
+Due Date Enabled: <input type="checkbox" name="DueEnabled" value="1" /> <br />
+Late Submissions Allowed: <input type="checkbox" name="LateSub" value="1" /></br>
 
 <script>
 $(function()
 	{
-	$( "#datepicker" ).datepicker();
-	$( "#datepicker2" ).datepicker();
+	$( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+	$( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
+	$('#timepicker').timepicker({timeFormat: 'hh:mm:ss' });
+	$('#timepicker2').timepicker({timeFormat: 'hh:mm:ss' });
 	}
 );
 </script>
 
-Do you want to have multiple evaluations? <input type="radio" name="multEvals" value="yes" /> Yes
-<input type="radio" name="multEvals" value="no" /> No</br>
-How many?<input type="text" name="numberOfEvals" />
+Do you want to have multiple evaluations? <input type="radio" name="Multiple" value="1" /> Yes
+<input type="radio" name="Multiple" value="0" /> No</br>
+How many? <input type="text" name="NumEval" />
 
 <div class="demo">
-<p>Date Available From: <input id="datepicker" type="text" value="Click Here"></p>
-<p>Date Disabled From: <input id="datepicker2" type="text" value="Click Here"></p>
+<p>Date Available From: <input id="datepicker" type="text" name="AvailDate"></p>
+<p>Time Available From: <input id="timepicker" type="text" name="AvailTime"></p>
+<p>Date Disabled From: <input id="datepicker2" type="text" name="DueDate"></p>
+<p>Time Available From: <input id="timepicker2" type="text" name="DueTime"></p>
 </div>
 
 </fieldset>
 <input type="submit" />
 </form>
+<?
+}else
+{
+echo "You do not have access to this page.";
+}
+?>
 
 </BODY>
 </HTML>

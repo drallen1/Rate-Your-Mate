@@ -20,6 +20,7 @@ define("DB_SERVER", "turing.cs.plymouth.edu");
 define("DB_USER", "drallen1");
 define("DB_PASS", "unicode");
 define("DB_NAME", "drallen1");
+define("DOC_ROOT", "wp3.turing.cs.plymouth.edu");
 
 /**
  * Database Table Constants - these constants
