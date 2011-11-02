@@ -1,12 +1,34 @@
-<?php
-/* This page is what instructors will see when they are logged in.
-Written by David Allen
-11.02.2011
-*/
+<?
+/**
+ * Main.php
+ *
+ * This is an example of the main page of a website. Here
+ * users will be able to login. However, like on most sites
+ * the login form doesn't just have to be on the main page,
+ * but re-appear on subsequent pages, depending on whether
+ * the user has logged in or not.
+ *
+ * Written by: Jpmaster77 a.k.a. The Grandmaster of C++ (GMC)
+ * Last Updated: August 26, 2004
+ */
 include("include/session.php");
-if($session->logged_in)
-{
-	echo "<h1>Logged In</h1>";
+?>
+
+<html>
+<title>Please Login to use Rate-Your-Mate</title>
+<body>
+
+<table>
+<tr><td>
+
+
+<?
+/**
+ * User has already logged in, so display relavent links, including
+ * a link to the admin center if the user is an administrator.
+ */
+if($session->logged_in){
+   echo "<h1>Logged In</h1>";
    echo "Welcome <b>$session->username</b>, you are logged in.<br>"
        ."[<a href=\"userinfo.php?user=$session->username\">My Account</a>] &nbsp;&nbsp;"
        ."[<a href=\"useredit.php\">Edit Account</a>] &nbsp;&nbsp;";
@@ -14,36 +36,15 @@ if($session->logged_in)
       echo "[<a href=\"admin/admin.php\">Admin Center</a>] &nbsp;&nbsp;";
    }
    echo "[<a href=\"process.php\">Logout</a>]<br>";
-	   if($session->userlevel>=8)
-		   {
-		   //If the person logged in has instructor privleges, show the instructor panel
-		?>
-		<html>
-			<head>
-				<title>Rate-Your-Mate Instructor Panel</title>
-			</head>
-			<body>
-				<h2>Instructor Panel</h2>
-		[<a href="ProjectCreation.html" target="home">Project Creation</a>]&nbsp;&nbsp;
-		[<a href="student.html" target="home">Student Add</a>]&nbsp;&nbsp;
-		[<a href="creategroup.html" target="home">Group Creation</a>]&nbsp;&nbsp;
-		[<a href="contractcreation.html" target="home">Contract Creation</a>]&nbsp;&nbsp;
-		[<a href="php/studentlist.php" target="home">Student List</a>]&nbsp;&nbsp;
-		[<a href="php/studentlistgroup.php" target="home">Student Group Add</a>]&nbsp;&nbsp;
-			</body>
-		</html>
-		<?
-		}else{
-			//otherwise show the student panel
-			?>
-			<h2>Student Panel</h2>
-			[<a href="contractcreation.html" target="home">Contract Creation</a>]&nbsp;&nbsp;
-			<?
-		}
-   }else
+   if($session->userlevel>=8)
    {
-   ?> 
-   <h1>Login</h1>
+	echo "You are an intstructor.";
+   }
+}
+else{
+?>
+
+<h1>Login</h1>
 <?
 /**
  * User not logged in, display the login form.
@@ -70,5 +71,26 @@ if($form->num_errors > 0){
 
 <?
 }
-   	?>
-	
+
+/**
+ * Just a little page footer, tells how many registered members
+ * there are, how many users currently logged in and viewing site,
+ * and how many guests viewing site. Active users are displayed,
+ * with link to their user information.
+ 
+echo "</td></tr><tr><td align=\"center\"><br>";
+echo "<b>Member Total:</b> ".$database->getNumMembers()."<br>";
+echo "There are $database->num_active_users registered members and ";
+echo "$database->num_active_guests guests viewing the site.<br><br>";
+
+include("include/view_active.php");
+*/
+?>
+
+
+</td></tr>
+</table>
+
+
+</body>
+</html>

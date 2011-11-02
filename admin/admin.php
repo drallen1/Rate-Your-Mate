@@ -135,8 +135,9 @@ Username:<br>
 <td>
 Level:<br>
 <select name="updlevel">
-<option value="1">1
-<option value="9">9
+<option value="1">1(Student)
+<option value="8">8(Instructor)
+<option value="9">9(Admin)
 </select>
 </td>
 <td>
