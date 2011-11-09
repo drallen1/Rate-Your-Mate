@@ -122,6 +122,14 @@ class MySQLDB
       $result = mysql_query($q, $this->connection);
       return (mysql_numrows($result) > 0);
    }
+   function studentIDTaken($STUDENTID){
+      if(!get_magic_quotes_gpc()){
+         $STUDENTID = addslashes($STUDENTID);
+      }
+      $q = "SELECT STUDENT_ID FROM ".TBL_USERS." WHERE STUDENT_ID = '$STUDENTID'";
+      $result = mysql_query($q, $this->connection);
+      return (mysql_numrows($result) > 0);
+   }
    
    /**
     * usernameBanned - Returns true if the username has
@@ -141,7 +149,7 @@ class MySQLDB
     * info into the database. Appropriate user level is set.
     * Returns true on success, false otherwise.
     */
-   function addNewUser($username, $password, $email){
+   function addNewUser($username, $password, $email, $fname, $lname, $STUDENT_ID){
       $time = time();
       /* If admin sign up, give admin user level */
       if(strcasecmp($username, ADMIN_NAME) == 0){
@@ -149,7 +157,7 @@ class MySQLDB
       }else{
          $ulevel = USER_LEVEL;
       }
-      $q = "INSERT INTO ".TBL_USERS." VALUES ('$username', '$password', '0', $ulevel, '$email', $time)";
+      $q = "INSERT INTO ".TBL_USERS." (username, password, userid, userlevel, email, timestamp, fname, lname, STUDENT_ID) VALUES ('$username', '$password', '0', $ulevel, '$email', $time, '$fname', '$lname', '$STUDENT_ID')";
       return mysql_query($q, $this->connection);
    }
    

@@ -1,10 +1,5 @@
 <?php
-$server = 'turing.plymouth.edu';
-$link = mysql_connect($server, 'drallen1' , 'unicode' );
-mysql_select_db("drallen1", $link);
-if (!link){
-      die('Error connecting to the database.');
-}
+include('includes/header.php');
 if(isset($_POST['Submit1'])){
 foreach($_POST['students_to_add'] as $student_id)
 	{

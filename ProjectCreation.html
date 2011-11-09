@@ -7,21 +7,30 @@ if($session->userlevel >=8){?>
 <legend>Project Creation</legend>
 
 Project Name: <input type="text" name="ProjectName" /></br>
+</br>
 
 Number of Groups: <input type="text" name="NumGroups" /></br>
+</br>
 
 Grade:<input type="text" name="Grade" /></br>
+</br>
 
 Who will create the contract? <input type="radio" name="Who" value="1" /> Instructor
 <input type="radio" name="Who" value="0" /> Student</br>
+</br>
 
 Who is being evaluated? <input type="radio" name="GradeSubmit" value="1" /> Evaluator 
 <input type="radio" name="GradeSubmit" value="0" /> Evaluatee
 <input type="radio" name="GradeSubmit" value="2" /> Both
 <input type="radio" name="GradeSubmit" value="3" /> None </br>
+</br>
 
-Due Date Enabled: <input type="checkbox" name="DueEnabled" value="1" /> <br />
-Late Submissions Allowed: <input type="checkbox" name="LateSub" value="1" /></br>
+Due Date Enabled: <input type="radio" name="DueEnabled" value="1" /> Yes
+		  <input type="radio" name="DueEnabled" value="0" /> No<br />
+</br>
+Late Submissions Allowed: <input type="radio" name="LateSub" value="1" />Yes 
+			  <input type="radio" name="LateSub" value="0" /> No</br>
+</br>
 
 <script>
 $(function()
@@ -36,13 +45,16 @@ $(function()
 
 Do you want to have multiple evaluations? <input type="radio" name="Multiple" value="1" /> Yes
 <input type="radio" name="Multiple" value="0" /> No</br>
-How many? <input type="text" name="NumEval" />
+How many? <input type="text" name="NumEval" /></br>
+</br>
+
 
 <div class="demo">
-<p>Date Available From: <input id="datepicker" type="text" name="AvailDate"></p>
-<p>Time Available From: <input id="timepicker" type="text" name="AvailTime"></p>
-<p>Date Disabled From: <input id="datepicker2" type="text" name="DueDate"></p>
-<p>Time Available From: <input id="timepicker2" type="text" name="DueTime"></p>
+<p>Date Open: <input id="datepicker" type="text" name="AvailDate"></p>
+<p>Time Open: <input id="timepicker" type="text" name="AvailTime"></p>
+</br>
+<p>Date Closed: <input id="datepicker2" type="text" name="DueDate"></p>
+<p>Time Closed: <input id="timepicker2" type="text" name="DueTime"></p>
 </div>
 
 </fieldset>

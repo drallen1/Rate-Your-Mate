@@ -12,7 +12,9 @@ include("include/session.php");
 ?>
 
 <html>
-<title>Jpmaster77's Login Script</title>
+<head>
+<link rel="stylesheet" href="css/common.css" />
+</head>
 <body>
 
 <?
@@ -41,6 +43,12 @@ echo "<b>Username: ".$req_user_info['username']."</b><br>";
 
 /* Email */
 echo "<b>Email:</b> ".$req_user_info['email']."<br>";
+
+echo "<b>First Name:</b> ".$req_user_info['fname']."<br>";
+
+echo "<b>Last Name:</b> ".$req_user_info['lname']."<br>";
+
+echo "<b>Student ID:</b> ".$req_user_info['STUDENT_ID']."<br>";
 
 /**
  * Note: when you add your own fields to the users table

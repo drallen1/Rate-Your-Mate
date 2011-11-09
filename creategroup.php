@@ -1,15 +1,17 @@
 <? include('includes/header.php'); 
 if($session->userlevel >=8){
-	if(isset($_FORM['Submit1'])){
+	if(isset($_POST['Submit1'])){
 	$GroupName=$_POST['GroupName'];
-
-	$query = "INSERT INTO Groups (GroupName) values ('$GroupName')";
+	$project = "SELECT PROJECT_ID FROM Project WHERE ProjectName='" . mysql_real_escape_string($_POST['Project'])."'";
+	$result2 = mysql_query($project) or die(mysql_error()); 
+	$PROJECT_ID=mysql_fetch_row($result2);
+	$query = "INSERT INTO Groups (GroupName, PROJECT_ID) values ('$GroupName', $PROJECT_ID[0])";
 	$result = mysql_query($query) or die(mysql_error()); 
 	echo "Group <strong>$GroupName</strong> added successfully.";
 	}
 ?>
 
-		<form action="creategroup.html" method="POST">
+		<form action="creategroup.php" method="POST">
 			Group Name: <input name="GroupName" type="text"/></br>
 
 			<p> Which project is this group associated? </br> 

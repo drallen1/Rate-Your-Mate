@@ -63,6 +63,9 @@ if($form->num_errors > 0){
 <form action="process.php" method="POST">
 <table align="left" border="0" cellspacing="0" cellpadding="3">
 <tr><td>Username:</td><td><input type="text" name="user" maxlength="30" value="<? echo $form->value("user"); ?>"></td><td><? echo $form->error("user"); ?></td></tr>
+<tr><td>First Name:</td><td><input type="text" name="fname" maxlength="30" value="<? echo $form->value("fname"); ?>"></td><td><? echo $form->error("fname"); ?></td></tr>
+<tr><td>Last Name:</td><td><input type="text" name="lname" maxlength="30" value="<? echo $form->value("lname"); ?>"></td><td><? echo $form->error("lname"); ?></td></tr>
+<tr><td>Student ID:</td><td><input type="text" name="STUDENT_ID" maxlength="9" value="<? echo $form->value("STUDENT_ID"); ?>"></td><td><? echo $form->error("STUDENT_ID"); ?></td></tr>
 <tr><td>Password:</td><td><input type="password" name="pass" maxlength="30" value="<? echo $form->value("pass"); ?>"></td><td><? echo $form->error("pass"); ?></td></tr>
 <tr><td>Email:</td><td><input type="text" name="email" maxlength="50" value="<? echo $form->value("email"); ?>"></td><td><? echo $form->error("email"); ?></td></tr>
 <tr><td colspan="2" align="right">

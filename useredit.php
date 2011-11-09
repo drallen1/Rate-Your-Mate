@@ -14,7 +14,9 @@ include("include/session.php");
 ?>
 
 <html>
-<title>Jpmaster77's Login Script</title>
+<head>
+<link rel="stylesheet" href="css/common.css" />
+</head>
 <body>
 
 <?
@@ -49,7 +51,7 @@ if($form->num_errors > 0){
 }
 ?>
 <form action="process.php" method="POST">
-<table align="left" border="0" cellspacing="0" cellpadding="3">
+<table border="0" cellspacing="0" cellpadding="3">
 <tr>
 <td>Current Password:</td>
 <td><input type="password" name="curpass" maxlength="30" value="

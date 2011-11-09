@@ -22,6 +22,10 @@ class Session
    var $userinfo = array();  //The array holding all user info
    var $url;          //The page url current being viewed
    var $referrer;     //Last recorded site page viewed
+   var $fname;
+   var $lname;
+   var $GROUP_ID;
+   var $STUDENT_ID;
    /**
     * Note: referrer should really only be considered the actual
     * page referrer in process.php, any other time it may be
@@ -108,6 +112,10 @@ class Session
          $this->username  = $this->userinfo['username'];
          $this->userid    = $this->userinfo['userid'];
          $this->userlevel = $this->userinfo['userlevel'];
+		 $this->fname 	  = $this->userinfo['fname'];
+		 $this->lname      = $this->userinfo['lname'];
+		 $this->GROUP_ID = $this->userinfo['GROUP_ID'];
+		 $this->STUDENT_ID = $this->userinfo['STUDENT_ID'];
          return true;
       }
       /* User not logged in */
@@ -172,6 +180,7 @@ class Session
       $this->username  = $_SESSION['username'] = $this->userinfo['username'];
       $this->userid    = $_SESSION['userid']   = $this->generateRandID();
       $this->userlevel = $this->userinfo['userlevel'];
+
       
       /* Insert userid into database and update active users table */
       $database->updateUserField($this->username, "userid", $this->userid);
@@ -238,7 +247,7 @@ class Session
     * 1. If no errors were found, it registers the new user and
     * returns 0. Returns 2 if registration failed.
     */
-   function register($subuser, $subpass, $subemail){
+   function register($subuser, $subpass, $subfname, $sublname, $substudentid, $subemail){
       global $database, $form, $mailer;  //The database, form and mailer object
       
       /* Username error checking */
@@ -311,6 +320,72 @@ class Session
          }
          $subemail = stripslashes($subemail);
       }
+	  
+	  
+	  $field = "fname";  //Use field name for username
+      if(!$subfname || strlen($subfname = trim($subfname)) == 0){
+         $form->setError($field, "* First Name not entered");
+      }
+      else{
+         /* Spruce up username, check length */
+         $subfname = stripslashes($subfname);
+         if(strlen($subfname) < 3){
+            $form->setError($field, "* First name below 3 characters");
+         }
+         else if(strlen($subfname) > 30){
+            $form->setError($field, "* First name above 30 characters");
+         }
+         /* Check if username is not alphanumeric */
+         else if(!eregi("^([0-9a-z])+$", $subfname)){
+            $form->setError($field, "* First name not alphanumeric");
+         }
+         /* Check if username is reserved */
+         else if(strcasecmp($subfname, GUEST_NAME) == 0){
+            $form->setError($field, "* First name reserved word");
+         }
+      }
+	  $field = "lname";  //Use field name for username
+      if(!$sublname || strlen($sublname = trim($sublname)) == 0){
+         $form->setError($field, "* Last Name not entered");
+      }
+      else{
+         /* Spruce up username, check length */
+         $sublname = stripslashes($sublname);
+         if(strlen($sublname) < 3){
+            $form->setError($field, "* Last name below 3 characters");
+         }
+         else if(strlen($sublname) > 30){
+            $form->setError($field, "* Last name above 30 characters");
+         }
+         /* Check if username is not alphanumeric */
+         else if(!eregi("^([0-9a-z])+$", $sublname)){
+            $form->setError($field, "* Last name not alphanumeric");
+         }
+         /* Check if username is reserved */
+         else if(strcasecmp($sublname, GUEST_NAME) == 0){
+            $form->setError($field, "* Last name reserved word");
+         }
+      }
+	  $field = "STUDENT_ID";  //Use field name for username
+      if(!$substudentid || strlen($substudentid = trim($substudentid)) == 0){
+         $form->setError($field, "* Student ID not entered");
+      }
+      else{
+         /* Spruce up username, check length */
+         $substudentid = stripslashes($substudentid);
+         if(strlen($substudentid) < 9){
+            $form->setError($field, "* STUDENT below 9 characters");
+         }
+         /* Check if username is not numeric */
+         else if(!eregi("^([0-9])+$", $substudentid)){
+            $form->setError($field, "* Student ID not numeric");
+         }
+		 else if($database->studentIDTaken($substudentid)){
+            $form->setError($field, "* Student ID already in use");
+         }
+         
+      }
+
 
       /* Errors exist, have user correct them */
       if($form->num_errors > 0){
@@ -318,7 +393,7 @@ class Session
       }
       /* No errors, add the new account to the */
       else{
-         if($database->addNewUser($subuser, md5($subpass), $subemail)){
+         if($database->addNewUser($subuser, md5($subpass), $subemail, $subfname, $sublname, $substudentid)){
             if(EMAIL_WELCOME){
                $mailer->sendWelcome($subuser,$subemail,$subpass);
             }

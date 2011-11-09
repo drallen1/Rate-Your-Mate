@@ -19,7 +19,7 @@ include("../include/session.php");
  */
 function displayUsers(){
    global $database;
-   $q = "SELECT username,userlevel,email,timestamp "
+   $q = "SELECT username,userlevel,email,timestamp,STUDENT_ID "
        ."FROM ".TBL_USERS." ORDER BY userlevel DESC,username";
    $result = $database->query($q);
    /* Error occurred, return given name by default */
@@ -34,14 +34,23 @@ function displayUsers(){
    }
    /* Display table contents */
    echo "<table align=\"left\" border=\"1\" cellspacing=\"0\" cellpadding=\"3\">\n";
-   echo "<tr><td><b>Username</b></td><td><b>Level</b></td><td><b>Email</b></td><td><b>Last Active</b></td></tr>\n";
+   echo "<tr><td><b>Username</b></td><td><b>Level</b></td><td><b>Email</b></td><td><b>Last Active</b></td><td><b>STUDENT_ID</b></td></tr>\n";
    for($i=0; $i<$num_rows; $i++){
       $uname  = mysql_result($result,$i,"username");
       $ulevel = mysql_result($result,$i,"userlevel");
+	  if($ulevel == 9)
+	  {
+		$ulevelname="Admin";
+	  }elseif($ulevel==8)
+	  {
+		$ulevelname="Instructor";
+	  }else{
+		$ulevelname="Student";
+	  }
       $email  = mysql_result($result,$i,"email");
       $time   = mysql_result($result,$i,"timestamp");
-
-      echo "<tr><td>$uname</td><td>$ulevel</td><td>$email</td><td>$time</td></tr>\n";
+	  $STUDENT_ID = mysql_result($result,$i,"STUDENT_ID");
+      echo "<tr><td>$uname</td><td>$ulevelname($ulevel)</td><td>$email</td><td>$time</td><td>$STUDENT_ID</td></tr>\n";
    }
    echo "</table><br>\n";
 }
@@ -91,7 +100,9 @@ else{
  */
 ?>
 <html>
-<title>Jpmaster77's Login Script</title>
+<head>
+<link rel="stylesheet" href="../css/common.css" />
+</head>
 <body>
 <h1>Admin Center</h1>
 <font size="5" color="#ff0000">
