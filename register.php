@@ -13,6 +13,7 @@ include("include/session.php");
 ?>
 
 <html>
+<head><link rel="stylesheet" href="css/common.css" /></head>
 <title>Registration Page</title>
 <body>
 

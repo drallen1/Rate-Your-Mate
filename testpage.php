@@ -7,29 +7,11 @@ include("include/session.php");
 ?>
 <html>
 			<head>
+			
 					<link rel="stylesheet" href="css/common.css" />
 					</head>
-			<body>
+			<body><div id="wrapper">
 <?
-function instructor()
-{
-echo'
-				<h2>Instructor Panel</h2>
-		[<a href="ProjectCreation.html">Project Creation</a>]&nbsp;&nbsp;
-		[<a href="project.php">Projects</a>]&nbsp;&nbsp;
-		[<a href="creategroup.php">Group Creation</a>]&nbsp;&nbsp;
-		[<a href="group.php">Groups</a>]&nbsp;&nbsp;
-		[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
-		[<a href="studentlist.php">Student List</a>]&nbsp;&nbsp;
-		[<a href="studentlistgroup.php">Student Group Add</a>]&nbsp;&nbsp;
-		';
-}
-function student()
-{
-	echo'			<h2>Student Panel</h2>
-			[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
-			[<a href="studentinfo.php">My Information</a>]&nbsp;&nbsp;';
-}
 if($session->logged_in)
 {
 	echo "<h1>Logged In</h1>";
@@ -41,15 +23,29 @@ if($session->logged_in)
       echo "[<a href=\"admin/admin.php\">Admin Center</a>] &nbsp;&nbsp;";
    }
    echo "[<a href=\"process.php\">Logout</a>]<br>";
-	   if($session->userlevel==9)
-		{
-			instructor();
-			student();
+	   if($session->userlevel>=8)
+		   {
 		   //If the person logged in has instructor privleges, show the instructor panel
-		}elseif($session->userlevel==8){
-			instructor();
+		?>
+		
+				<h2>Instructor Panel</h2>
+		[<a href="ProjectCreation.html">Project Creation</a>]&nbsp;&nbsp;
+		[<a href="project.php">Projects</a>]&nbsp;&nbsp;
+		[<a href="creategroup.php">Group Creation</a>]&nbsp;&nbsp;
+		[<a href="group.php">Groups</a>]&nbsp;&nbsp;
+		[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
+		[<a href="studentlist.php">Student List</a>]&nbsp;&nbsp;
+		[<a href="studentlistgroup.php">Student Group Add</a>]&nbsp;&nbsp;
+			</body>
+		</html>
+		<?
 		}else{
-			student();
+			//otherwise show the student panel
+			?>
+			<h2>Student Panel</h2>
+			[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
+			[<a href="studentinfo.php">My Information</a>]&nbsp;&nbsp;
+			<?
 		}
    }else
    {
@@ -80,12 +76,10 @@ if($form->num_errors > 0){
 <tr><td colspan="2" align="center"><br>Not registered? <a href="register.php">Sign-Up!</a></td></tr>
 </table>
 </form>
+</div>
 </body>
 </html>
 <?
 }
    	?>
-	</body>
-	</html>
-	
 	

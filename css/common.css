@@ -1,8 +1,26 @@
 /*COMMON ELEMENTS USED IN ALL TEMPLATES*/
 
 body {
-background:#C1AEA1;
+background:#e0f1ff;
 text-align: center;
+margin-left:auto;
+margin-right:auto;
+padding:20px;
+}
+
+table
+{ 
+margin-left: auto;
+margin-right: auto;
+}
+
+#wrapper {
+margin-left:auto;
+margin-right:auto;
+background:#FFCCFF;
+padding:5px;
+border:1px solid #021a40;
+width:950px;
 }
 
 h1 {
@@ -49,4 +67,19 @@ text-decoration:none;
 a:hover {
 text-decoration:underline;
 color:#666666;
+}
+
+fieldset {
+width:400;
+margin-left: auto;
+margin-right: auto;
+}
+
+input {
+    border: 1px solid #00f;
+    background: #fff;
+}
+input:hover {
+    border: 1px solid #005;
+    background: #ccc;
 }

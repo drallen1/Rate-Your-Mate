@@ -101,6 +101,7 @@ if($session->GROUP_ID==NULL){
 		}else{
 			$finalized="Yes";
 		}
+		$comments=$data5['Comments'];
 	}
 	echo"<h2>Goals</h2>";
 	echo "<p>$goals</p>";
@@ -112,10 +113,12 @@ if($session->GROUP_ID==NULL){
 	}
 	echo "<h2>Behaviors</h3><br>";
 	for($i = 0; $i < $numrows; $i++){
-		echo $behaviorName[$i] . "<br><br>";
+		echo "Behavior " . ($i + 1) . ": " . $behaviorName[$i] . "<br><br>";
 	}
 	echo "<strong>Submission Type: " . $type . "</strong><br>";
 	echo "<strong>Finalized: " . $finalized . "</strong><br>";
+	echo "<h2>Comments:</h2>
+	<p>" . $comments . "</p>";
 	echo"</fieldset>";
 }
 	

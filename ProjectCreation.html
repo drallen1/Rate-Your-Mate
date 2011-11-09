@@ -3,7 +3,7 @@
 if($session->userlevel >=8){?>
 
 <form action="php/projectcreation.php" method="post">
-<fieldset>
+<fieldset style="width: 30;">
 <legend>Project Creation</legend>
 
 Project Name: <input type="text" name="ProjectName" /></br>
@@ -13,8 +13,9 @@ Number of Groups: <input type="text" name="NumGroups" /></br>
 </br>
 
 Grade:<input type="text" name="Grade" /></br>
+</fieldset>
 </br>
-
+<fieldset>
 Who will create the contract? <input type="radio" name="Who" value="1" /> Instructor
 <input type="radio" name="Who" value="0" /> Student</br>
 </br>
@@ -47,7 +48,8 @@ Do you want to have multiple evaluations? <input type="radio" name="Multiple" va
 <input type="radio" name="Multiple" value="0" /> No</br>
 How many? <input type="text" name="NumEval" /></br>
 </br>
-
+</fieldset>
+<fieldset>
 
 <div class="demo">
 <p>Date Open: <input id="datepicker" type="text" name="AvailDate"></p>

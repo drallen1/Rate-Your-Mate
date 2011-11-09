@@ -20,6 +20,7 @@
 	echo "<pre>";
 	print_r($_POST);
 	echo "</pre>";
+	
 	$additional_comments=$_POST['additional_comments'];
 	$sql="INSERT INTO Contract(GROUP_ID, CONTRACT_ID,Goals, Comments, PROJECT_ID)VALUES('$group_id','$project_id', '$group_goals', '$additional_comments','$project_id')";
 	$sql2="INSERT INTO Behavior(BehaviorName)VALUES ('$behavior1'),('$behavior2'),('$behavior3'),('$behavior4'),('$behavior5')";

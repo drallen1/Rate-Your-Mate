@@ -3,8 +3,43 @@ if($session->logged_in){
 			echo "<pre>";
 			print_r($session->userinfo);
 			echo "</pre>";
- ?>	
-	<form id="contract_creation" name="contract creation" action="php/contractcreation.php" method="POST">
+	if(isset($_POST['Submit'])){
+		$host="turing.plymouth.edu"; // Host name
+		$username="drallen1"; // Mysql username
+		$password="unicode"; // Mysql password
+		$db_name="drallen1"; // Database name
+		$tbl_name="Contract"; // Table name
+		// Connect to server and select database.
+		mysql_connect("$host", "$username", "$password")or die("cannot connect");
+		mysql_select_db("$db_name")or die("cannot select DB");
+		
+		// get data that sent from form
+		$group_id=$session->GROUP_ID;
+		$project_id=$_POST['Project'];
+		$group_goals=$_POST['group_goals'];
+		$behavior1=$_POST['behavior1'];
+		$behavior2=$_POST['behavior2'];
+		$behavior3=$_POST['behavior3'];
+		$behavior4=$_POST['behavior4'];
+		$behavior5=$_POST['behavior5'];
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
+		
+		$additional_comments=$_POST['Additional_Comments'];
+		$sql="INSERT INTO Contract(GROUP_ID,Goals, Comments, PROJECT_ID)VALUES('$group_id','$group_goals', '$additional_comments','$project_id')";
+		echo $sql . "<br>";
+		echo $sql2 . "<br>";
+		$result=mysql_query($sql)or die(mysql_error());
+		$contractID=mysql_insert_id();
+		$sql2="INSERT INTO Behavior(BehaviorName, CONTRACT_ID)VALUES ('$behavior1',$contractID),('$behavior2',$contractID),('$behavior3',$contractID),('$behavior4',$contractID),('$behavior5',$contractID)";
+		$result2=mysql_query($sql2)or die(mysql_error());
+		$sql3="UPDATE Groups set CONTRACT_ID=" . $contractID . " WHERE GROUP_ID=" . $group_id;
+		$result3=mysql_query($sql3)or die(mysql_error());
+	}
+
+?>
+	<form id="contract_creation" name="contract creation" action="contractcreation.php" method="POST">
 		<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
 			<tr>
 				<td colspan="3" bgcolor="#413839"><strong>Contract Creation</strong></td>
