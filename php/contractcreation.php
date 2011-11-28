@@ -17,9 +17,6 @@
 	$behavior3=$_POST['behavior3'];
 	$behavior4=$_POST['behavior4'];
 	$behavior5=$_POST['behavior5'];
-	echo "<pre>";
-	print_r($_POST);
-	echo "</pre>";
 	
 	$additional_comments=$_POST['additional_comments'];
 	$sql="INSERT INTO Contract(GROUP_ID, CONTRACT_ID,Goals, Comments, PROJECT_ID)VALUES('$group_id','$project_id', '$group_goals', '$additional_comments','$project_id')";

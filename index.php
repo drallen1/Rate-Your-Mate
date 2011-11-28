@@ -10,6 +10,7 @@ include("include/session.php");
 					<link rel="stylesheet" href="css/common.css" />
 					</head>
 			<body>
+			<div id="wrapper">
 <?
 function instructor()
 {
@@ -28,7 +29,9 @@ function student()
 {
 	echo'			<h2>Student Panel</h2>
 			[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
-			[<a href="studentinfo.php">My Information</a>]&nbsp;&nbsp;';
+			[<a href="studentinfo.php">My Information</a>]&nbsp;&nbsp;
+			[<a href="evalform.php">Evaluation</a>]&nbsp;&nbsp;
+			[<a href="contractaccept.php">Contracts</a>]&nbsp;&nbsp;';
 }
 if($session->logged_in)
 {
@@ -84,6 +87,7 @@ if($form->num_errors > 0){
 </html>
 <?
 }
+include('includes/footer.php');
    	?>
 	</body>
 	</html>

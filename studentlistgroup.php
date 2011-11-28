@@ -64,6 +64,6 @@ echo <<<HTML
 <INPUT TYPE="submit" name="Submit1" VALUE="Add Selected Students">
 </FORM>
 HTML;
-
+include('includes/footer.php');
 ?>
 

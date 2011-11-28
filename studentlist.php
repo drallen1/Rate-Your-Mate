@@ -36,23 +36,10 @@ echo <<<HTML
 HTML;
 }
 echo "</table>";
-$query = "SELECT * FROM Groups";
-echo "<table border=1px cellspacing=3px>
-<th>GROUP_ID</th>
-<th>Group Name</th>";
-$result = mysql_query($query) or die(mysql_error());
-while($row=mysql_fetch_array($result)){
-echo <<<HTML
-<tr>
-<td>{$row['GROUP_ID']}</td>
-<td>{$row['GroupName']}</td>
-</tr>
-HTML;
-}
-echo "</table>";
 echo <<<HTML
 <INPUT TYPE="submit" name="Submit1" VALUE="Delete Selected Students">
 </FORM>
 HTML;
+include('includes/footer.php');
 ?>
 

@@ -1,8 +1,5 @@
 <? include('includes/header.php');
 if($session->logged_in){
-			echo "<pre>";
-			print_r($session->userinfo);
-			echo "</pre>";
 	if(isset($_POST['Submit'])){
 		$host="turing.plymouth.edu"; // Host name
 		$username="drallen1"; // Mysql username
@@ -15,6 +12,7 @@ if($session->logged_in){
 		
 		// get data that sent from form
 		$group_id=$session->GROUP_ID;
+		$user_id=$session->STUDENT_ID;
 		$project_id=$_POST['Project'];
 		$group_goals=$_POST['group_goals'];
 		$behavior1=$_POST['behavior1'];
@@ -22,12 +20,9 @@ if($session->logged_in){
 		$behavior3=$_POST['behavior3'];
 		$behavior4=$_POST['behavior4'];
 		$behavior5=$_POST['behavior5'];
-		echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";
 		
 		$additional_comments=$_POST['Additional_Comments'];
-		$sql="INSERT INTO Contract(GROUP_ID,Goals, Comments, PROJECT_ID)VALUES('$group_id','$group_goals', '$additional_comments','$project_id')";
+		$sql="INSERT INTO Contract(edit,last_edited_by,GROUP_ID,Goals, Comments, PROJECT_ID)VALUES('0','$user_id','$group_id','$group_goals', '$additional_comments','$project_id')";
 		echo $sql . "<br>";
 		echo $sql2 . "<br>";
 		$result=mysql_query($sql)or die(mysql_error());
@@ -110,9 +105,6 @@ if($session->logged_in){
 				<td>&nbsp;</td>
 				<td>
 					<input type="submit" name="Submit" value="Submit" /> 
-					<input type="submit" name="Submit2" value="Accept" />
-					
-					<input type="submit" name="Submit3" value="Cancel" />
 				</td>
 			</tr>	
 		</table>
@@ -125,6 +117,7 @@ if($session->logged_in){
 {
 echo "You do not have access to this page.";
 }
+include('includes/footer.php');
 ?>
 
 

@@ -19,7 +19,7 @@ include('include/session.php');
 	</head>
 	<body>
 
-	
+	<div id="wrapper">
 	<?
 	if($session->logged_in){
    echo "You are logged in as: <b>$session->username</b>.<br>"
@@ -34,4 +34,5 @@ include('include/session.php');
 else{
 echo "You need to <a href=main.php>login</a>.";
 }
+?>
 

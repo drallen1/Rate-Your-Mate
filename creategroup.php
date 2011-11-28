@@ -39,4 +39,5 @@ if($session->userlevel >=8){
 {
 echo "You do not have access to this page.";
 }
+include('includes/footer.php');
 ?>

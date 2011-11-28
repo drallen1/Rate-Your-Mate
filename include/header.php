@@ -11,7 +11,6 @@ include('include/session.php');
 		<script type="text/javascript" src="js/ui/jquery.ui.core.js"></script>
 		<script type="text/javascript" src="js/ui/jquery-ui-timepicker-addon"></script>
 		<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.16.custom.css"/>
-		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/common.css" />
 		<!--<link rel="stylesheet" href="css/text.css" /> 
 		<link rel="stylesheet" href="css/960_24_col.css" />
@@ -19,7 +18,7 @@ include('include/session.php');
 	</head>
 	<body>
 
-	
+	<div id="wrapper">
 	<?
 	if($session->logged_in){
    echo "You are logged in as: <b>$session->username</b>.<br>"
@@ -34,4 +33,6 @@ include('include/session.php');
 else{
 echo "You need to <a href=main.php>login</a>.";
 }
+?>
+</div>
 

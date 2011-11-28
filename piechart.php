@@ -10,6 +10,7 @@
 	width: 30em;
 	margin: 0em 0em 1em 5em;
 }
+
 body {
   background: #fff;
   color: #333;
@@ -80,6 +81,14 @@ body {
 }
 
 </style>
+
+<script type="text/javascript">
+$(function () {
+	$('div.basicLinked').slider().linkedSliders();
+	$('div.basicLinked:first').slider('value', 100);
+});
+</script>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <!--[if IE]>
 <script src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
@@ -98,7 +107,7 @@ function pieChart() {
   var sliceGradientColour = "#ddd";                 // Colour to use for one end of the chart gradient
   var maxPullOutDistance = 25;                      // How far, in pixels, to pull slices out when clicked
   var pullOutFrameStep = 4;                         // How many pixels to move a slice with each animation frame
-  var pullOutFrameInterval = 40;                    // How long (in ms) between each animation frame
+  var pullOutFrameInterval = 15;                    // How long (in ms) between each animation frame
   var pullOutLabelPadding = 65;                     // Padding between pulled-out slice and its label  
   var pullOutLabelFont = "bold 16px 'Trebuchet MS', Verdana, sans-serif";  // Pull-out slice label font
   var pullOutValueFont = "bold 12px 'Trebuchet MS', Verdana, sans-serif";  // Pull-out slice value font
@@ -451,12 +460,8 @@ function pieChart() {
 };
 
 </script>
-<script type="text/javascript">
-$(function () {
-	$('div.basicLinked').slider().linkedSliders();
-	$('div.basicLinked:first').slider('value', 100);
-});
-</script>
+
+
 </head>
 <body>
 
@@ -494,7 +499,6 @@ $(function () {
       <td>Ryan</td><td>5</td>
     </tr>
   </table>
-
 
 </div>
 <div class="basicLinked"></div>

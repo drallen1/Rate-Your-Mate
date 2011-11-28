@@ -30,4 +30,5 @@ $groupID=$data['GROUP_ID'];
 echo '</table>
 <INPUT TYPE="submit" name="Submit1" VALUE="Delete Selected Groups">
 </form>';
+include('includes/footer.php');
 ?>

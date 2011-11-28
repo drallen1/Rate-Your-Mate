@@ -2,8 +2,9 @@
 
 if($session->userlevel >=8){?>
 
+
 <form action="php/projectcreation.php" method="post">
-<fieldset style="width: 30;">
+<fieldset style="width:150;">
 <legend>Project Creation</legend>
 
 Project Name: <input type="text" name="ProjectName" /></br>
@@ -44,9 +45,9 @@ $(function()
 );
 </script>
 
-Do you want to have multiple evaluations? <input type="radio" name="Multiple" value="1" /> Yes
+Do you want to have multiple evaluations? <input type="radio" name="Multiple" value="1" /> Yes 
 <input type="radio" name="Multiple" value="0" /> No</br>
-How many? <input type="text" name="NumEval" /></br>
+If so, how many? <input type="text" name="NumEval" value="1" /></br>
 </br>
 </fieldset>
 <fieldset>
@@ -67,7 +68,10 @@ How many? <input type="text" name="NumEval" /></br>
 {
 echo "You do not have access to this page.";
 }
+include('includes/footer.php');
 ?>
+
+
 
 </BODY>
 </HTML>

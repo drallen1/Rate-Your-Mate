@@ -127,3 +127,4 @@ if($session->GROUP_ID==NULL){
 <? }else{
 echo "You do not have access to this page.";
 }
+include('includes/footer.php');

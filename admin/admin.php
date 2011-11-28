@@ -13,6 +13,7 @@
  */
 include("../include/session.php");
 
+
 /**
  * displayUsers - Displays the users database table in
  * a nicely formatted html table.
@@ -104,6 +105,7 @@ else{
 <link rel="stylesheet" href="../css/common.css" />
 </head>
 <body>
+
 <h1>Admin Center</h1>
 <font size="5" color="#ff0000">
 <b>::::::::::::::::::::::::::::::::::::::::::::</b></font>

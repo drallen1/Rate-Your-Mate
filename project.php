@@ -110,4 +110,5 @@ while($data=mysql_fetch_array($result)){
 echo '</table>
 <INPUT TYPE="submit" name="Submit1" VALUE="Delete Selected Projects">
 </form>';
+include('includes/footer.php');
 ?>

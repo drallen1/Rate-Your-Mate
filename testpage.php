@@ -28,7 +28,8 @@ if($session->logged_in)
 		   //If the person logged in has instructor privleges, show the instructor panel
 		?>
 		
-				<h2>Instructor Panel</h2>
+				<div id="bannertop"><h2>Instructor Panel</h2></div>
+				<div>
 		[<a href="ProjectCreation.html">Project Creation</a>]&nbsp;&nbsp;
 		[<a href="project.php">Projects</a>]&nbsp;&nbsp;
 		[<a href="creategroup.php">Group Creation</a>]&nbsp;&nbsp;
@@ -36,6 +37,7 @@ if($session->logged_in)
 		[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
 		[<a href="studentlist.php">Student List</a>]&nbsp;&nbsp;
 		[<a href="studentlistgroup.php">Student Group Add</a>]&nbsp;&nbsp;
+		</div>
 			</body>
 		</html>
 		<?
