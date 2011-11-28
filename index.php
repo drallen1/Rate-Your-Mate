@@ -23,6 +23,7 @@ echo'
 		[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
 		[<a href="studentlist.php">Student List</a>]&nbsp;&nbsp;
 		[<a href="studentlistgroup.php">Student Group Add</a>]&nbsp;&nbsp;
+		[<a href="evaluations.php">Student Evaluations</a>]&nbsp;&nbsp;
 		';
 }
 function student()
@@ -89,6 +90,7 @@ if($form->num_errors > 0){
 }
 include('includes/footer.php');
    	?>
+	</div>
 	</body>
 	</html>
 	

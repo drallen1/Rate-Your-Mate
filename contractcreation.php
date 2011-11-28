@@ -22,7 +22,7 @@ if($session->logged_in){
 		$behavior5=$_POST['behavior5'];
 		
 		$additional_comments=$_POST['Additional_Comments'];
-		$sql="INSERT INTO Contract(edit,last_edited_by,GROUP_ID,Goals, Comments, PROJECT_ID)VALUES('0','$user_id','$group_id','$group_goals', '$additional_comments','$project_id')";
+		$sql="INSERT INTO Contract(edit,last_edited_by,GROUP_ID,Goals, Comments)VALUES('0','$user_id','$group_id','$group_goals', '$additional_comments')";
 		echo $sql . "<br>";
 		echo $sql2 . "<br>";
 		$result=mysql_query($sql)or die(mysql_error());
@@ -40,10 +40,12 @@ if($session->logged_in){
 				<td colspan="3" bgcolor="#413839"><strong>Contract Creation</strong></td>
 			</tr>
 			<tr>
+			<!--
 			<td valign="top" halign="left"><strong>Project I.D.</strong></td>
 			<td valign="top" width="2%">:</td>
-	
+			-->
 			<?php
+			/*
 				$query = "SELECT ProjectName FROM Project";
 				$result = mysql_query($query) or die(mysql_error());
 				
@@ -52,7 +54,8 @@ if($session->logged_in){
 				while ($row = mysql_fetch_array($result)){
 				echo "<option>" . $row['ProjectName'] . "</option>";
 				}
-				echo '</select></td>';					
+				echo '</select></td>';	
+			*/				
 			?>
 			</tr>
 			<tr>

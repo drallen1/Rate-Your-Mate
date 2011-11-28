@@ -1,0 +1,46 @@
+Changes before showing Robin and Scott
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: David Allen <drallen1@turing.cs.plymouth.edu>
+#
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   ProjectCreation.html
+#	modified:   admin/admin.php
+#	new file:   contractaccept.php
+#	modified:   contractcreation.php
+#	new file:   contractedit.php
+#	modified:   creategroup.php
+#	modified:   css/common.css
+#	new file:   css/images/background1.png
+#	new file:   css/images/bannertop.png
+#	new file:   css/images/bodybg.png
+#	new file:   evalform.php
+#	new file:   evalprocess.php
+#	modified:   group.php
+#	new file:   images/background1.png
+#	new file:   images/bodybg.png
+#	modified:   include/header.php
+#	new file:   includes/footer.php
+#	new file:   includes/footer.txt
+#	modified:   includes/header.php
+#	modified:   index.php
+#	modified:   main.php
+#	modified:   php/contractcreation.php
+#	modified:   piechart.php
+#	modified:   project.php
+#	modified:   studentinfo.php
+#	modified:   studentlist.php
+#	modified:   studentlistgroup.php
+#	modified:   testpage.php
+#
+# Changed but not updated:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    index.html
+#	deleted:    php/student.phps
+#
