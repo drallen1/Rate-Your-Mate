@@ -5,7 +5,7 @@ if(isset($_POST['Submit1'])){
 	  $query = "SELECT ProjectName FROM Project WHERE PROJECT_ID=" . mysql_real_escape_string($project_id);
 	  $result = mysql_query($query) or die(mysql_error());
 	  $data = mysql_fetch_row($result);
-	  echo "Project <strong>" .$data[0] . "</strong> deleted successfully. <br>";
+	  popup("Project " .$data[0] . " deleted successfully.");
 	  $query = "DELETE FROM Project WHERE PROJECT_ID=" . mysql_real_escape_string($project_id);
 	  $result = mysql_query($query) or die(mysql_error());
 	}

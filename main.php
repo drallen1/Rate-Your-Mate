@@ -3,7 +3,7 @@
 Written by David Allen
 11.02.2011
 */
-include("include/session.php");
+include("includes/header.php");
 ?>
 <html>
 			<head>
@@ -36,6 +36,7 @@ function student()
 }
 if($session->logged_in)
 {
+
 	echo "<h1>Logged In</h1>";
    echo "Welcome <b>$session->username</b>, you are logged in.<br>"
 		."[<a href=\"main.php\">Home</a>] &nbsp;&nbsp;"

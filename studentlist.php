@@ -6,7 +6,7 @@ if(isset($_POST['Submit1'])){
 	  $query = "SELECT fname,lname FROM users WHERE STUDENT_ID=" . mysql_real_escape_string($student_id);
 	  $result = mysql_query($query) or die(mysql_error());
 	  $data = mysql_fetch_row($result);
-	  echo "Student <strong>" .$data[0] . ", " . $data[1] . "</strong> deleted successfully. <br>";
+	  popup("Student " .$data[0] . ", " . $data[1] . " deleted successfully.");
 	  $query = "DELETE FROM users WHERE STUDENT_ID=" . mysql_real_escape_string($student_id);
 	  $result = mysql_query($query) or die(mysql_error());
 	}

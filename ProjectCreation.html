@@ -3,7 +3,7 @@
 if($session->userlevel >=8){?>
 
 
-<form action="php/projectcreation.php" method="post">
+<form action="EvalDate.php" method="post">
 <fieldset style="width:150;">
 <legend>Project Creation</legend>
 
@@ -21,11 +21,14 @@ Who will create the contract? <input type="radio" name="Who" value="1" /> Instru
 <input type="radio" name="Who" value="0" /> Student</br>
 </br>
 
-Who is being evaluated? <input type="radio" name="GradeSubmit" value="1" /> Evaluator 
-<input type="radio" name="GradeSubmit" value="0" /> Evaluatee
-<input type="radio" name="GradeSubmit" value="2" /> Both
-<input type="radio" name="GradeSubmit" value="3" /> None </br>
-</br>
+Who is being evaluated? 
+<select name="GradeSubmit">
+<option value="1" /> Evaluator </option>
+<option value="0" /> Evaluatee </option>
+<option value="2" /> Both </option>
+<option value="3" /> None </option>
+</select>
+</br></br>
 
 Due Date Enabled: <input type="radio" name="DueEnabled" value="1" /> Yes
 		  <input type="radio" name="DueEnabled" value="0" /> No<br />
@@ -52,16 +55,22 @@ If so, how many? <input type="text" name="NumEval" value="1" /></br>
 </fieldset>
 <fieldset>
 
-<div class="demo">
+<div class="demo" align="right">
 <p>Date Open: <input id="datepicker" type="text" name="AvailDate"></p>
 <p>Time Open: <input id="timepicker" type="text" name="AvailTime"></p>
 </br>
 <p>Date Closed: <input id="datepicker2" type="text" name="DueDate"></p>
 <p>Time Closed: <input id="timepicker2" type="text" name="DueTime"></p>
 </div>
+</br>
 
 </fieldset>
+<fieldset>
+<div align="middle">
 <input type="submit" />
+</div>
+</fieldset>
+
 </form>
 <?
 }else

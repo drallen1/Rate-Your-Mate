@@ -1,6 +1,13 @@
 <?php include('includes/header.php');
 if($session->logged_in==true)
 {
+if(isset($_POST['Accept'])){
+$contract_id=$_POST['contracts'];
+$student_id=$session->STUDENT_ID;
+$query="INSERT INTO Accept (STUDENT_ID,CONTRACT_ID,Accepted) VALUES ($student_id,$contract_id,\"1\")";
+$result = mysql_query($query) or die(mysql_error());
+popup("You have successfully accepted a contract. Accepted contracts will be in green text.");
+}
 ?>
 <html>
 	<head>
@@ -66,7 +73,7 @@ if($session->GROUP_ID==NULL){
 		</tr>";
 	}
 	echo "</table>";
-	echo"
+	echo"<form method=\"post\" action=\"contractaccept.php\">
         <h2>Current Contracts</h2><br>
         <table border=1px,cellspacing=3px>
         <th>Select</th>
@@ -76,6 +83,7 @@ if($session->GROUP_ID==NULL){
         <th>Behaviors</th>
         <th>Last Edited By</th>
         <th>Edited?</th>
+		<th>Accepted</th>
         ";
         for($i=0;$i<$num;$i++)
         {
@@ -87,7 +95,17 @@ if($session->GROUP_ID==NULL){
             $comments=$contract['Comments'];
             $last_edited_by=$contract['last_edited_by'];
             $edit=$contract['edit'];
-            echo"<tr><td><input type=\"radio\" name=\"contracts\" value=$contract_id></input></td>";
+			
+			$query="SELECT * FROM Accept WHERE STUDENT_ID=" . $session->STUDENT_ID . " AND CONTRACT_ID=" . $contract_ids[$i][0] . " LIMIT 1";
+			$result=mysql_query($query) or die(mysql_error());
+			$data=mysql_fetch_row($result);
+			if($data[3] == 1){
+			echo "<tr id=\"accepted\">";
+			}else
+			{
+			echo "<tr>";
+			}
+            echo"<td><input type=\"radio\" name=\"contracts\" value=$contract_id></input></td>";
             echo"<td><a href=\"contractedit?contractid=" . $contract_id . "\">Edit</a></td>";
             echo"<td>$goals</td><td>$comments</td><td>";
 			
@@ -114,10 +132,19 @@ if($session->GROUP_ID==NULL){
             echo"<td>NULL</td>";
             }
 			
+			
+			if($data[3] == 1){
+				echo"<td>Accepted</td>";//this is where if it is accepted or not is saved
+			}else
+			{
+				echo"<td>NO</td>";//this is where if it is accepted or not is saved
+			}
+			
+			
           }
           echo"</tr>";
         }
-		echo"</table>";/*
+		echo"</table><input type=\"Submit\" value=\"Accept Contract\" name=\"Accept\" /></form>";/*
 	echo"<fieldset><legend>Contract Information</legend>";
 	$query5="SELECT * FROM Contract WHERE CONTRACT_ID=" . $contractID;
 	$result5= mysql_query($query5) or die(mysql_error());

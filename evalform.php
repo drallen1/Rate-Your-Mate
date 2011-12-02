@@ -1,5 +1,5 @@
 <?php include("includes/header.php");
-  if ($session->userlevel >= 8){
+  if ($session->userlevel > 8 || $session->userlevel < 8){
     if(isset($_POST['Submit'])){
       $query="SELECT * FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $session->GROUP_ID . " AND b.CONTRACT_ID=g.CONTRACT_ID";
       $btwo = mysql_query($query) or die(mysql_error());
@@ -15,7 +15,7 @@
       };
       $qfour = mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $session->GROUP_ID . " AND STUDENT_ID=" . $_POST[graded]);
       $rfour = mysql_fetch_array($qfour);
-      echo "Your comments for " . $rfour[lname] . ", " . $rfour[fname] . " have been submitted.";
+      popup("Your comments for " . $rfour[lname] . ", " . $rfour[fname] . " have been submitted.");
     };?>
     <!DOCTYPE html>
       <html lang="en">
@@ -23,44 +23,46 @@
 		      <?php
             $link = mysql_connect("localhost","drallen1","unicode") or die(mysql_error);
             mysql_select_db("drallen1");
-
-            $qfour = mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $session->GROUP_ID);
-            $numD = mysql_num_rows($qfour);
-
+            
+            $qsix = mysql_query("SELECT * FROM users u, Eval e WHERE u.GROUP_ID=" . $session->GROUP_ID . " AND NOT EXISTS(SELECT * FROM Eval e WHERE u.STUDENT_ID=e.STUDENT_ID) AND e.GRADER_ID=" . $session->STUDENT_ID . " AND u.STUDENT_ID!=" . $session->STUDENT_ID);
+            $numE = mysql_num_rows($qsix);
+            /***************************************************
+            //WHEN numE == 0 GO TO PIE CHART
+            ***************************************************/
             $qtwo = mysql_query("SELECT * FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $session->GROUP_ID . " AND b.CONTRACT_ID=g.CONTRACT_ID");
             $numB = mysql_num_rows($qtwo);
-		?>
-		<form action="evalform.php" method="POST">
+            
+            if($numE>1)
+              $page="evalform.php";
+            else
+              $page="evalprocess.php";
+		      
+		      echo "<form action=$page method=\"POST\">";?>
 			
-			<!--Student ID: <input name="STUDENT_ID" type="text" value="<!?php echo $Session[STUDENT_ID];?>" readonly="readonly"/> </br-->
-      Student: <select name="graded">
-        <option selected="selected">Please Select a Student to Grade</option>
-        <?php for($i=0;$i<$numD;$i++){
-          $rfour = mysql_fetch_array($qfour);?>
-          <option value="<?php echo $rfour[STUDENT_ID]?>"><?php echo $rfour[fname] . " " . $rfour[lname]?></option>
-          <?php };?>
-      </select></br></br>
-      <!--Grader: <input name="GRADER_ID" type="text" value="<?php echo $row[GRADER_ID];?>" readonly="readonly"/> </br-->
-      <!--/br-->
-      <?php for($i=0;$i<$numB;$i++){ 
-        $rtwo = mysql_fetch_array($qtwo);
-        echo "Behavior: <input name=\"BEHAVIOR_ID\" type=\"text\" value=\"" . $rtwo[BehaviorName] . "\" readonly=\"readonly\"/> </br>";
-        /* . $rthree[Comment] . */
-        echo "Comments: <textarea name=\"" . $rtwo['BEHAVIOR_ID'] . "\" rows=\"5\" cols=\"50\"></textarea> </br>"; ?>
+            Student: <select name="graded">
+              <option selected="selected">Please Select a Student to Grade</option>
+              <?php for($i=0;$i<$numE;$i++){
+                $rsix = mysql_fetch_array($qsix);?>
+                <option value="<?php echo $rsix[STUDENT_ID]?>"><?php echo $rsix[fname] . " " . $rsix[lname]?></option>
+              <?php };?>
+            </select></br></br>
+      
+            <?php for($i=0;$i<$numB;$i++){ 
+              $rtwo = mysql_fetch_array($qtwo);
+              echo "Behavior: <input name=\"BEHAVIOR_ID\" type=\"text\" value=\"" . $rtwo[BehaviorName] . "\" readonly=\"readonly\"/> </br>";
+              echo "Comments: <textarea name=\"" . $rtwo['BEHAVIOR_ID'] . "\" rows=\"5\" cols=\"50\"></textarea> </br>"; ?>
+            <?php };?>
+            </br>
+            <input type="submit" value="Send!" name="Submit"/>
+          </form>
+		      <?php
+            mysql_close($link);
+		      ?>
+        </body>
 
-      <?php };?>
-      </br>
-      <input type="submit" value="Send!" name="Submit"/>
-		</form>
-		<?php
-			mysql_close($link);
-		?>
-<ul>
-</body>
+      </html>
 
-</html>
-
-<? include("includes/footer.php"); 
-}else{
-echo "You don't have access to this.";
+    <? include("includes/footer.php"); 
+  }else{
+  echo "You don't have access to this.";
 };?>

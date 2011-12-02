@@ -6,26 +6,29 @@ if (!link){
 	die('Error connecting to the database.');
 }
 $ProjectName=$_POST['ProjectName'];
-$NumGroups=$_POST['NumGroups'];
-$Grade=$_POST['Grade'];
-$Who=$_POST['Who'];
-$GradeSubmit=$_POST['GradeSubmit'];
-$DueEnabled=$_POST['DueEnabled'];
-$LateSub=$_POST['LateSub'];
-$AvailDate=$_POST['AvailDate'];
-$DueDate=$_POST['DueDate'];
-$NumEval=$_POST['NumEval'];
-$Multiple=$_POST['Multiple'];
-$AvailTime=$_POST['AvailTime'];
-$DueTime=$_POST['DueTime'];
+$Counter=$_POST['NumEval'];
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
 
-$query = "INSERT INTO Project(ProjectName, NumGroups, Who, GradeSubmit, Multiple, NumEval, AvailDate, DueDate, DueEnabled, Grade, LateSub, AvailTime, DueTime) values ('$ProjectName', $NumGroups, $Who, $GradeSubmit, $Multiple, $NumEval, '$AvailDate', '$DueDate', $DueEnabled, $Grade, $LateSub, '$AvailTime', '$DueTime')";
+for($i=0;$i<$Counter;$i++)
+{
+$AvailDate = $_POST['AvailDate' . $i];
+$AvailTime = $_POST['AvailTime' . $i];
+$DueDate = $_POST['DueDate' . $i];
+$DueTime = $_POST['DueTime' . $i];
+$PROJECT_ID = $_POST['PROJECT_ID'];
+$EvalNum = ($i + 1);
+$query="INSERT INTO EvalDate (AvailDate,AvailTime,DueDate,DueTime,PROJECT_ID,EvalNum) VALUES ('$AvailDate','$AvailTime','$DueDate','$DueTime',$PROJECT_ID,$EvalNum)";
 echo $query;
-$result = mysql_query($query) or die(mysql_error()); 
+$result=mysql_query($query) or die (mysql_error());
+	//$AvailDate' . $i . '=$_POST[AvailDate$i];
+	//$AvailTime' . $i . '=$_POST['AvailTime' . $i . ''];
+	//$DueDate' . $i . '=$_POST['DueDate' . $i . ''];
+	//$DueDate' . $i . '=$_POST['DueDate' . $i . ''];
+}
 
-
-echo "Project $ProjectName was successfully created."
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
 ?>

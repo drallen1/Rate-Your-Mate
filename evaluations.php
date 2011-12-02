@@ -22,7 +22,7 @@ if(isset($_POST['Select'])){
 		$lname=$data['lname'];
 		$fname=$data['fname'];
 		$student_id=$data['STUDENT_ID'];
-		echo "<tr><td>$student_id</td><td>$lname</td><td>$fname</td></tr>";
+		echo "<tr><td><a href=\"instructoreval?studentid=" . $student_id . "\">$student_id</a></td><td>$lname</td><td>$fname</td></tr>";
 		
 	}
 	echo "</table>";

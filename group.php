@@ -5,7 +5,7 @@ if(isset($_POST['Submit1'])){
 	  $query = "SELECT GroupName FROM Groups WHERE GROUP_ID=" . mysql_real_escape_string($group_id);
 	  $result = mysql_query($query) or die(mysql_error());
 	  $data = mysql_fetch_row($result);
-	  echo "Group <strong>" .$data[0] . "</strong> deleted successfully. <br>";
+	  popup("Group " .$data[0] . " deleted successfully.");
 	  $query = "DELETE FROM Groups WHERE GROUP_ID=" . mysql_real_escape_string($group_id);
 	  $result = mysql_query($query) or die(mysql_error());
 	}

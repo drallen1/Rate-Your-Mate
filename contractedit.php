@@ -13,7 +13,7 @@ $num = $_POST['num'];
 		$query = "UPDATE Behavior SET BehaviorName=\"" . $behaviors[$x] . "\" WHERE BEHAVIOR_ID=" . $behaviorid[$x] ;
 		$result= mysql_query($query) or die(mysql_error());
 	}
-	echo "Contract Updated Successfully.";
+	popup('Contract edited sucessfully.');
 }
 $query="SELECT * FROM Contract WHERE CONTRACT_ID=" . $contract_id;
 $result = mysql_query($query) or die(mysql_error());
