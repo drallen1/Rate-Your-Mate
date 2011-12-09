@@ -26,6 +26,7 @@ class Session
    var $lname;
    var $GROUP_ID;
    var $STUDENT_ID;
+   var $Progress;
    /**
     * Note: referrer should really only be considered the actual
     * page referrer in process.php, any other time it may be
@@ -116,6 +117,7 @@ class Session
 		 $this->lname      = $this->userinfo['lname'];
 		 $this->GROUP_ID = $this->userinfo['GROUP_ID'];
 		 $this->STUDENT_ID = $this->userinfo['STUDENT_ID'];
+		  $this->Progress = $this->userinfo['Progress'];
          return true;
       }
       /* User not logged in */

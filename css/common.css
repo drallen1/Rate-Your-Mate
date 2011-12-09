@@ -50,7 +50,7 @@ color:#85360f;
 
 h2 {
 font-family:georgia, times new roman, serif;
-font-size:12px;color:#333333;
+font-size:18px;color:#333333;
 margin-bottom:0px;
 }
 
@@ -102,4 +102,9 @@ input {
 input:hover {
     border: 1px solid #005;
     background: #ccc;
+}
+
+ui-slider-horizontal {
+	width: 30em;
+	margin: 0em 0em 1em 5em;
 }

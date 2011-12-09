@@ -29,6 +29,8 @@ $result = mysql_query($query) or die(mysql_error());
 $PROJECT_ID=mysql_insert_id();
 
 popup("Project $ProjectName was successfully created.");
+	$query="UPDATE users SET Progress=1 WHERE STUDENT_ID=" . $session->STUDENT_ID;
+	$result=mysql_query($query) or die(mysql_error());
 
 
 if($session->userlevel >=8){

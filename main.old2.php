@@ -3,7 +3,7 @@
 Written by David Allen
 11.02.2011
 */
-include("include/session.php");
+include("includes/header.php");
 ?>
 <html>
 			<head>
@@ -12,11 +12,50 @@ include("include/session.php");
 			<body>
 			<div id="wrapper">
 <?
-
+function instructor()
+{
+echo'
+				<h2>Instructor Panel</h2>
+		[<a href="ProjectCreation.html">Project Creation</a>]&nbsp;&nbsp;
+		[<a href="project.php">Projects</a>]&nbsp;&nbsp;
+		[<a href="creategroup.php">Group Creation</a>]&nbsp;&nbsp;
+		[<a href="group.php">Groups</a>]&nbsp;&nbsp;
+		[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
+		[<a href="studentlist.php">Student List</a>]&nbsp;&nbsp;
+		[<a href="studentlistgroup.php">Student Group Add</a>]&nbsp;&nbsp;
+		[<a href="evaluations.php">Student Evaluations</a>]&nbsp;&nbsp;
+		';
+}
+function student()
+{
+	echo'			<h2>Student Panel</h2>
+			[<a href="contractcreation.php">Contract Creation</a>]&nbsp;&nbsp;
+			[<a href="studentinfo.php">My Information</a>]&nbsp;&nbsp;
+			[<a href="evalform.php">Evaluation</a>]&nbsp;&nbsp;
+			[<a href="contractaccept.php">Contracts</a>]&nbsp;&nbsp;';
+}
 if($session->logged_in)
 {
-echo"<h1>Click the image below to start Rate Your Mate!</h1><br><a href=\"main.php\"><img src='images/rateyourmateanimated.gif' width='500' height='260'  /></a>";
-	
+
+	echo "<h1>Logged In</h1>";
+   echo "Welcome <b>$session->username</b>, you are logged in.<br>"
+		."[<a href=\"main.php\">Home</a>] &nbsp;&nbsp;"
+       ."[<a href=\"userinfo.php?user=$session->username\">My Account</a>] &nbsp;&nbsp;"
+       ."[<a href=\"useredit.php\">Edit Account</a>] &nbsp;&nbsp;";
+   if($session->isAdmin()){
+      echo "[<a href=\"admin/admin.php\">Admin Center</a>] &nbsp;&nbsp;";
+   }
+   echo "[<a href=\"process.php\">Logout</a>]<br>";
+	   if($session->userlevel==9)
+		{
+			instructor();
+			student();
+		   //If the person logged in has instructor privleges, show the instructor panel
+		}elseif($session->userlevel==8){
+			instructor();
+		}else{
+			student();
+		}
    }else
    {
    ?> 
@@ -33,7 +72,6 @@ if($form->num_errors > 0){
 ?>
 <html>
 <body>
-<img src='images/rateyourmateanimated.gif' width='500' height='260'  />
 <h1>Login</h1>
 <form action="process.php" method="POST">
 <table align="center" border="0" cellspacing="0" cellpadding="3">
@@ -53,5 +91,8 @@ if($form->num_errors > 0){
 }
 include('includes/footer.php');
    	?>
+	</div>
+	</body>
+	</html>
 	
 	

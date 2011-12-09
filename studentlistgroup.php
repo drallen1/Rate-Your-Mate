@@ -12,6 +12,8 @@ foreach($_POST['students_to_add'] as $student_id)
 	  $query = "UPDATE users SET GROUP_ID =" . $data2[0] . " WHERE STUDENT_ID=" . mysql_real_escape_string($student_id);
 	  $result = mysql_query($query) or die(mysql_error());
 	 popup("Student " .$data[0] . ", " . $data[1] . " added to " . $_POST['GroupName']. " successfully");
+	 $query="UPDATE users SET Progress=3 WHERE STUDENT_ID=" . $session->STUDENT_ID;
+	 $result=mysql_query($query) or die(mysql_error());
 	}
 }
 //$query = "SELECT s.*, g.* FROM Students s, Groups g WHERE (s.group_id=g.group_id OR s.group_id=NULL) ORDER BY s.group_id";

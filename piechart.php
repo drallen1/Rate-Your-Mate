@@ -1,9 +1,47 @@
-<?php include('includes/header.php'); ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<? include('includes/header.php');
+if($session->logged_in){
+	$host="turing.plymouth.edu"; // Host name
+	$username="drallen1"; // Mysql username
+	$password="unicode"; // Mysql password
+	$db_name="drallen1"; // Database name
+	$tbl_name="Contract"; // Table name
+	// Connect to server and select database.
+	mysql_connect("$host", "$username", "$password")or die("cannot connect");
+	mysql_select_db("$db_name")or die("cannot select DB");
+	
+	// get data that sent from form
+	$group_id=$session->GROUP_ID;
+	$user_id=$session->STUDENT_ID;
+	
+	//STUDENT FIRST NAME LAST NAME
+	$query_student_id = "SELECT fname,lname FROM users WHERE STUDENT_ID ='$user_id'"; //pull student id from user_id
+	$student_id_result=mysql_query($query_student_id) or die("display_db_query:" . mysql_error()); //result student first, last
+	$student_id= mysql_fetch_row($student_id_result);
+	
+	$query_grade = "SELECT * FROM Eval WHERE STUDENT_ID ='$user_id'";
+	$query_grade_result = mysql_query($query_grade) or die("display_db_query:" . mysql_error());
+	$student_grade = mysql_fetch_row($query_grade_result);
+	//echo "$student_grade[4] - "; //grade
+	
+	$query_group_id = "SELECT GROUP_ID FROM Eval WHERE STUDENT_ID = '$user_id'";
+	$group_id_result = mysql_query($query_group_id) or die("display_db_query:" . mysql_error());
+	$group_id  = mysql_fetch_row($group_id_result);
+	//echo "$group_id[0] - ";
+	
+	$query_group_grade = "SELECT * FROM Eval WHERE GROUP_ID='$group_id[0]'";
+	$group_grade_result = mysql_query($query_group_grade) or die("display_db_query:" . mysql_error());
+	$group_grade  = mysql_fetch_array($group_grade_result);
+	$column_count=mysql_num_fields($group_grade_result) or die("display_db_query:". mysql_error()); //customer id field length
+	
+while($group_grade  = mysql_fetch_array($group_grade_result)){
+	$totalgroupgrade = $totalgroupgrade + $group_grade['Grade'];
+}
+$average = $totalgroupgrade / $column_count;
+$total = $totalgroupgrade + $student_grade[4];
 
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+echo <<<HTML
+<head>
 
 <style type="text/css">
 .ui-slider-horizontal {
@@ -88,8 +126,6 @@ $(function () {
 	$('div.basicLinked:first').slider('value', 100);
 });
 </script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <!--[if IE]>
 <script src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
 <![endif]-->
@@ -464,46 +500,31 @@ function pieChart() {
 
 </head>
 <body>
-
 <div id="container">
 
   <canvas id="chart" width="600" height="500"></canvas>
 
   <table id="chartData">
-
     <tr>
-      <th>Widget</th><th>Sales ($)</th>
+      <th>Member</th><th>Grade</th>
      </tr>
-
     <tr style="color: #0DA068">
-      <td>David</td><td>2</td>
+      <td>$student_id[1], $student_id[0]</td><td>$student_grade[4]</td>
     </tr>
-
     <tr style="color: #194E9C">
-      <td>Wayne</td><td>3</td>
-    </tr>
-
-    <tr style="color: #ED9C13">
-      <td>Austin</td><td>4</td>
-    </tr>
-
-    <tr style="color: #ED5713">
-      <td>Josh</td><td>6</td>
-    </tr>
-
-    <tr style="color: #057249">
-      <td>Nate</td><td>3</td>
-    </tr>
-
-    <tr style="color: #5F91DC">
-      <td>Ryan</td><td>5</td>
+		<td>Other</td><td>$total</td>
     </tr>
   </table>
 
 </div>
-<div class="basicLinked"></div>
-<div class="basicLinked"></div>
-<div class="basicLinked"></div>
 </body>
 </html>
-
+HTML;
+?>
+<?
+}else
+{
+echo "You do not have access to this page.";
+}
+include('includes/footer.php');
+?>
