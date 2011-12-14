@@ -1,6 +1,36 @@
 <?php
   include('includes/header.php');
   if ($session->userlevel > 8 || $session->userlevel < 8){
+    if(isset($_POST['Submit'])){
+      $exp = explode(",", $_POST['slider_values']);
+      $result = (count($exp))-1;
+      $output = array_slice($exp, 0, $result);
+      $total = 0;
+      for($i=0;$i<$result;$i++){
+        $output[$i] = trim($output[$i]);
+        $output[$i] = intval($output[$i]);
+        $total += $output[$i];
+      };
+      $k=0;
+      for($i=0;$i<$result;$i++){
+        for($j=$i+1;$j<$result;$j++){
+          if($i==$j)
+            $k++;
+        };
+      };
+      
+      if($total == 23 && $k <= 1){
+        printf ("<script>location.href=\"evalprocess.php\"</script>");
+      }?>
+      
+      <form action="evalprocess.php" method="POST">
+        <?php for($i=0;$i<$result;$i++){
+        echo "<input type=\"text\" value=\"" . $output[$i] . "\" size=\"5\"/>";
+        };?>
+      </form>
+      <?php
+      echo $total;
+    };
 ?>
 <html>
   <head>
@@ -13,15 +43,16 @@
       }
     </style>
     <script type="text/javascript">
-      url = "linkedsliders.php?var="
-    </script>
-    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
-    <script type="text/javascript" src="js/ui/jquery.linkedsliders.js"></script>
-    <script type="text/javascript" src="js/ui/ui/jquery.linkedsliders.js"></script>
-    <script type="text/javascript" src="js/ui/ui/jquery.linkedsliders.min.js"></script>
-    <script type="text/javascript" src="js/ui/ui/jquery.linkedsliders.pack.js"></script>
-    <script type="text/javascript">
+    //total = 0;
+    //<!--/script>
+    /*<script type="text/javascript" */src="js/jquery-1.6.2.min.js";//><!--/script>
+    
+    /*<script type="text/javascript" */src="js/ui/jquery.linkedsliders.js";//><!/script>
+    /*<script type="text/javascript" */src="js/ui/ui/jquery.linkedsliders.js";//><!/script>
+    /*<script type="text/javascript" */src="js/ui/ui/jquery.linkedsliders.min.js";//><!/script>
+    /*<script type="text/javascript" */src="js/ui/ui/jquery.linkedsliders.pack.js";//><!/script>
+    /*<script type="text/javascript" */src="js/jquery-ui-1.8.16.custom.min.js";//><!/script>
+    //<script type="text/javascript">
       $(function () {
         $('div.defaultSlider').slider().linkedSliders();
         $('div.defaultSlider').bind('slidechange', function(event, ui) {
@@ -33,7 +64,15 @@
             var value = $(this).slider('value');
             
             result += ' + ' + value + '%';
-            result2 += '' + Math.floor((value/100) * check) + ', ';
+            balance = (Math.floor(Math.random() * 10)) + 1;
+            if(balance > 8)
+            {
+              result2 += '' + Math.floor((value/100) * check) + ', ';
+            }
+            else
+            {
+              result2 += '' + Math.round((value/100) * check) + ', ';
+            }
             total += value;
 		      });
 		      $('#defaultPercentages').text(result.substring(3) + ' = ' + (total + .5) + '%');
@@ -44,14 +83,19 @@
     </script>
   </head>
   <body>
-    <?php $query=mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $session->GROUP_ID);
+    <font size="6">Rate Your Mates</font>
+    
+    </br>
+    <?php $query=mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $session->GROUP_ID . " AND STUDENT_ID!=" . $session->STUDENT_ID);
       $num=mysql_num_rows($query);
       ?></br></br></br><?php
-      for($i=0;$i<$num;$i++){?>
+      for($i=0;$i<$num;$i++){
+        $qone = mysql_fetch_array($query);
+        echo "<font size=\"5\">" . $qone[fname] . " " . $qone[lname] . "</font>";?>
         <div class="defaultSlider"></div>
     <?php };?>
     <pre><div id="defaultPercentages"></div><pre>
-    <form action="evalprocess.php" method="POST">
+    <form action="linkedsliders.php" method="POST">
       <input type="text" name="slider_values" id="slider_values"/>
       <input type="submit" value="Send!" name="Submit"/>
     </form>

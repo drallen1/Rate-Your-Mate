@@ -1,18 +1,22 @@
 <?php
 include('includes/header.php');
 
-
+go/m
 $student_id=$_GET['studentid'];
 $query="SELECT GROUP_ID FROM users WHERE STUDENT_ID=". $student_id;
 						$result=mysql_query($query) or die(mysql_error());
 						$data=mysql_fetch_array($result);
 						$group_id=$data['GROUP_ID'];
+$query2="SELECT CONTRACT_ID FROM Groups WHERE GROUP_ID=". $group_id;
+						$result2=mysql_query($query2) or die(mysql_error());
+						$data2=mysql_fetch_array($result2);
+						$contract_id=$data2['CONTRACT_ID'];
 if($session->userlevel>=8)
 
 //if they are an instructor
 {
  if(isset($_POST['Submit'])){
-      $query="SELECT * FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $session->GROUP_ID . " AND b.CONTRACT_ID=g.CONTRACT_ID";
+      $query="SELECT * FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $group_id . " AND b.CONTRACT_ID=g.CONTRACT_ID";
       $btwo = mysql_query($query) or die(mysql_error());
       $numB = mysql_num_rows($btwo);
       $query2="INSERT INTO Eval (STUDENT_ID, Grader_ID, GROUP_ID, Grade) VALUES (" . $_POST[graded] . ", " . $student_id . ", " . $session->GROUP_ID . ", '10')";
@@ -24,7 +28,7 @@ if($session->userlevel>=8)
         $query3="INSERT INTO EvalComment (CONTRACT_ID, BEHAVIOR_ID, Comment, EVAL_ID) VALUES (" . $r2[CONTRACT_ID] . ", " . $r2[BEHAVIOR_ID] . ", \"" . $_POST[$r2[BEHAVIOR_ID]] . "\", " . $evalid . ")";
         mysql_query($query3) or die(mysql_error());
       };
-      $qfour = mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $session->GROUP_ID . " AND STUDENT_ID=" . $_POST[graded]);
+      $qfour = mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $group_id . " AND STUDENT_ID=" . $_POST[graded]);
       $rfour = mysql_fetch_array($qfour);
       popup("Your comments for " . $rfour[lname] . ", " . $rfour[fname] . " have been submitted.");
     };
@@ -39,7 +43,7 @@ if($session->userlevel>=8)
             //WHEN numE == 0 GO TO PIE CHART
             ***************************************************/
             //QUERY
-            $qtwo = mysql_query("SELECT * FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $session->GROUP_ID . " AND b.CONTRACT_ID=g.CONTRACT_ID");
+            $qtwo = mysql_query("SELECT * FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $group_id . " AND b.CONTRACT_ID=g.CONTRACT_ID");
              // match eval id
             $numB = mysql_num_rows($qtwo);
             

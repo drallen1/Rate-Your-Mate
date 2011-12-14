@@ -1,10 +1,11 @@
 <?php include("includes/header.php");?>
   <pre>
   <?php echo "U did it";
-    if(isset($_POST['Submit'])){
-      echo "</br>" . $_POST['slider_values'] . "</br>";
+    
+    //if(isset($_POST['Submit'])){
+      //echo "</br>" . $_POST['slider_values'] . "</br>";
       
-      print_r (explode(",", $_POST['slider_values']));
+      //print_r (explode(",", $_POST['slider_values']));
       
       $exp = explode(",", $_POST['slider_values']);
       $result = (count($exp))-1;
@@ -13,11 +14,28 @@
       for($i=0;$i<$result;$i++){
         $output[$i] = trim($output[$i]);
         $output[$i] = intval($output[$i]);
-        $output[$i] = $output[$i]+1;
+        //$output[$i] = $output[$i]+1;
+        
+        $total += $output[$i];
       };
-      echo "</br>";
       
-      print_r ($output);
+      echo "</br>" . $total;
+      
+      $query=mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $session->GROUP_ID . " AND STUDENT_ID!=" . $session->STUDENT_ID);
+      $num=mysql_num_rows($query);
+      
+      
+      for($i=0;$i<$num;$i++){
+        $qone = mysql_fetch_array($query);
+        $q2 = "UPDATE Eval SET Grade=" . $output[$i] . " WHERE STUDENT_ID=" . $qone[STUDENT_ID] . " AND GROUP_ID=" . $session->GROUP_ID;
+        mysql_query($q2) or die(mysql_error());
+        
+        
+      };
+      
+      //echo "</br>";
+      
+      //print_r ($output);
       /*$query="SELECT * FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $session->GROUP_ID . " AND b.CONTRACT_ID=g.CONTRACT_ID";
       $btwo = mysql_query($query) or die(mysql_error());
       $numB = mysql_num_rows($btwo);
