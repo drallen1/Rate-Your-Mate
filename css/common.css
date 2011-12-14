@@ -12,7 +12,10 @@ table
 padding:0px;
 margin:0px;
 }
-
+.alignCenter{
+text-align:center;
+margin: 0 auto;
+}
 #bannertop {
 margin-left:auto;
 margin-right:auto;

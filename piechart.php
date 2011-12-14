@@ -1,4 +1,4 @@
-<? include('includes/header.php');
+<?
 if($session->logged_in){
 	$host="turing.plymouth.edu"; // Host name
 	$username="drallen1"; // Mysql username
@@ -10,8 +10,8 @@ if($session->logged_in){
 	mysql_select_db("$db_name")or die("cannot select DB");
 	
 	// get data that sent from form
-	$group_id=$session->GROUP_ID;
-	$user_id=$session->STUDENT_ID;
+	$group_id=$_GET[GROUP_ID];
+	$user_id=$_GET[STUDENT_ID];
 	
 	//STUDENT FIRST NAME LAST NAME
 	$query_student_id = "SELECT fname,lname FROM users WHERE STUDENT_ID ='$user_id'"; //pull student id from user_id
@@ -526,5 +526,4 @@ HTML;
 {
 echo "You do not have access to this page.";
 }
-include('includes/footer.php');
 ?>

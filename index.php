@@ -10,7 +10,6 @@ include("include/session.php");
 					<link rel="stylesheet" href="css/common.css" />
 					</head>
 			<body>
-			<div id="wrapper">
 <?
 
 if($session->logged_in)
@@ -35,6 +34,7 @@ if($form->num_errors > 0){
 <body>
 <img src='images/rateyourmateanimated.gif' width='500' height='260'  />
 <h1>Login</h1>
+<div align="center" class="alignCenter">
 <form action="process.php" method="POST">
 <table align="center" border="0" cellspacing="0" cellpadding="3">
 <tr><td>Username:</td><td><input type="text" name="user" maxlength="30" value="<? echo $form->value("user"); ?>"></td><td><? echo $form->error("user"); ?></td></tr>
@@ -47,6 +47,7 @@ if($form->num_errors > 0){
 <tr><td colspan="2" align="center"><br>Not registered? <a href="register.php">Sign-Up!</a></td></tr>
 </table>
 </form>
+</div>
 </body>
 </html>
 <?

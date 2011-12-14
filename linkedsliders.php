@@ -20,17 +20,18 @@
       };
       
       if($total == 23 && $k <= 1){
-        printf ("<script>location.href=\"evalprocess.php\"</script>");
-      }?>
+        $query=mysql_query("SELECT * FROM users WHERE GROUP_ID=" . $session->GROUP_ID . " AND STUDENT_ID!=" . $session->STUDENT_ID);
+        $num=mysql_num_rows($query);
       
-      <form action="evalprocess.php" method="POST">
-        <?php for($i=0;$i<$result;$i++){
-        echo "<input type=\"text\" value=\"" . $output[$i] . "\" size=\"5\"/>";
-        };?>
-      </form>
-      <?php
-      echo $total;
-    };
+        for($i=0;$i<$num;$i++){
+          $qone = mysql_fetch_array($query);
+          $q2 = "UPDATE Eval SET Grade=" . $output[$i] . " WHERE STUDENT_ID=" . $qone[STUDENT_ID] . " AND GROUP_ID=" . $session->GROUP_ID;
+          mysql_query($q2) or die(mysql_error());
+        };
+        
+        printf ("<script>location.href=\"main.php\"</script>");
+      }
+    }
 ?>
 <html>
   <head>

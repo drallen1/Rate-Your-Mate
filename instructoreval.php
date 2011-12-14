@@ -1,7 +1,6 @@
 <?php
 include('includes/header.php');
 
-go/m
 $student_id=$_GET['studentid'];
 $query="SELECT GROUP_ID FROM users WHERE STUDENT_ID=". $student_id;
 						$result=mysql_query($query) or die(mysql_error());
@@ -71,7 +70,7 @@ if($session->userlevel>=8)
 							});
 					});
 		</script>
-			<input type="hidden" name="studentid" id="studentid" value="<?php echo $session->STUDENT_ID;?>" />
+			<input type="hidden" name="studentid" id="studentid" value="<?php echo $student_id;?>" />
             Student: <select name="graded" id="graded">
               <option selected="selected">Please Select an Evaluatee</option>
               <?php for($i=0;$i<$numE;$i++){
