@@ -23,8 +23,6 @@ if($session->logged_in){
 		
 		$additional_comments=$_POST['Additional_Comments'];
 		$sql="INSERT INTO Contract(edit,last_edited_by,GROUP_ID,Goals, Comments)VALUES('0','$user_id','$group_id','$group_goals', '$additional_comments')";
-		echo $sql . "<br>";
-		echo $sql2 . "<br>";
 		$result=mysql_query($sql)or die(mysql_error());
 		$contractID=mysql_insert_id();
 		$sql2="INSERT INTO Behavior(BehaviorName, CONTRACT_ID)VALUES ('$behavior1',$contractID),('$behavior2',$contractID),('$behavior3',$contractID),('$behavior4',$contractID),('$behavior5',$contractID)";

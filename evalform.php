@@ -1,5 +1,10 @@
 <?php include("includes/header.php");
   if ($session->userlevel > 8 || $session->userlevel < 8){
+	$query="SELECT g.CONTRACT_ID, c.* FROM Groups g , Contract c WHERE g.Group_ID=" . $session->GROUP_ID . " AND g.CONTRACT_ID=c.CONTRACT_ID";
+	$result=mysql_query($query) or die($mysql_error());
+	$data=mysql_fetch_assoc($result);
+	$finalized=$data['Finalized'];
+	if($finalized==1){
     //$qsix = mysql_query("SELECT * FROM users u WHERE u.GROUP_ID=" . $session->GROUP_ID . " AND NOT EXISTS(SELECT * FROM Eval e WHERE u.STUDENT_ID=e.STUDENT_ID)"/* AND EXISTS(SELECT * FROM Eval e WHERE e.GRADER_ID=" . $session->STUDENT_ID . ") */ . " AND u.STUDENT_ID!=" . $session->STUDENT_ID);
     //$numE = mysql_num_rows($qsix); AND e.GRADER_ID!=" . $session->STUDENT_ID . " AND e.PROJECT_ID!=" . $projID[PROJECT_ID] . "
     $qtwo = mysql_query("SELECT b.BEHAVIOR_ID FROM Behavior b, Groups g WHERE g.GROUP_ID=" . $session->GROUP_ID . " AND b.CONTRACT_ID=g.CONTRACT_ID");
@@ -122,6 +127,9 @@
 
       <?
     include("includes/footer.php"); 
+	}else{
+	echo "<h1>You do not have a finalized contract.</h1>";
+	}
   }else{
   echo "You don't have access to this.";
 };?>

@@ -29,43 +29,13 @@
           mysql_query($q2) or die(mysql_error());
         };
         
-        //printf ("<script>location.href=\"main.php\"</script>");
+        printf ("<script>location.href=\"main.php\"</script>");
       }
     }
 ?>
 <html>
   <head>
 
-    <script type="text/javascript">
-
-      $(function () {
-        $('div.defaultSlider').slider().linkedSliders();
-        $('div.defaultSlider').bind('slidechange', function(event, ui) {
-		      var result = '';
-		      var result2 = '';
-		      var check = 23;
-		      var total = -.5;
-		      $('div.defaultSlider').each(function() {
-            var value = $(this).slider('value');
-            
-            result += ' + ' + value + '%';
-            balance = (Math.floor(Math.random() * 10)) + 1;
-            if(balance > 8)
-            {
-              result2 += '' + Math.floor((value/100) * check) + ', ';
-            }
-            else
-            {
-              result2 += '' + Math.round((value/100) * check) + ', ';
-            }
-            total += value;
-		      });
-		      $('#defaultPercentages').text(result.substring(3) + ' = ' + (total + .5) + '%');
-		      $('#slider_values').val(result2);
-		
-        }).filter(':first').slider('value', 100);
-      });
-    </script>
   </head>
   <body>
     <font size="6">Rate Your Mates</font>

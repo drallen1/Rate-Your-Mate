@@ -41,7 +41,9 @@ echo '</select><input type="Submit" name="Select2" value="Select"/></form>';
 
 if(isset($_POST['Select2'])){
 	$GROUP_ID=$_POST['GroupName'];
-	$query="SELECT * FROM users WHERE GROUP_ID=" . $GROUP_ID;
+	//$query="SELECT users.*,EvalComment.STUDENT_ID FROM users LEFT JOIN EvalComment ON WHERE GROUP_ID=" . $GROUP_ID . " JOIN ;
+	$query="SELECT * FROM users u WHERE u.GROUP_ID=" . $GROUP_ID. " AND EXISTS(SELECT * FROM Eval e WHERE u.STUDENT_ID=e.STUDENT_ID)";
+	//$qsix = mysql_query($sql = "SELECT * FROM users u WHERE u.GROUP_ID=" . $group_id . " AND EXISTS(SELECT * FROM Eval e WHERE u.STUDENT_ID=e.STUDENT_ID) AND u.STUDENT_ID != " . $student_id);
 	$result=mysql_query($query) or die(mysql_error());
 	//stuff to do when they select a group
 	echo '<table border=1px cellspacing=3px>

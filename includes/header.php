@@ -78,6 +78,12 @@ echo "<span id=\"white\">You are logged in as <strong>$session->username.</stron
 <tr><td valign=top width=145px background="images/bgleft.png">
 <?php
 if($session->logged_in){
+?>
+<a href="main.php"><img src="images/home.png" data-hover="images/homehover.png"></a>
+<a href="userinfo.php?user=<?php echo"$session->username"; ?>"><img src="images/myaccount.png" data-hover="images/myaccounthover.png"></a>
+<a href="useredit.php"><img src="images/editaccount.png" data-hover="images/editaccounthover.png"></a>
+<a href="process.php"><img src="images/logout.png" data-hover="images/logouthover.png"></a>
+<?
 if($session->userlevel>=8){
 ?>
 <img src="images/instructor.png">
@@ -89,27 +95,22 @@ if($session->userlevel>=8){
 <a href="studentlist.php"><img src="images/studentlist.png" data-hover="images/studentlisthover.png"></a>
 <a href="studentlistgroup.php"><img src="images/studentgroupadd.png" data-hover="images/studentgroupaddhover.png"></a>
 <a href="evaluations.php"><img src="images/studentevaluations.png" data-hover="images/studentevaluationshover.png"></a>
-<table bgcolor="#000000" width=100% height=15px><tr><td></td></tr></table>
+<a href="contractacceptinstructor.php"><img src="images/contracts.png" data-hover="images/contractshover.png"></a>
 
-<img src="images/admin.png">
-<a href="main.php"><img src="images/home.png" data-hover="images/homehover.png"></a>
-<a href="userinfo.php?user=<?php echo"$session->username"; ?>"><img src="images/myaccount.png" data-hover="images/myaccounthover.png"></a>
-<a href="useredit.php"><img src="images/editaccount.png" data-hover="images/editaccounthover.png"></a>
 <?php
 if($session->userlevel==9){
 ?>
+<img src="images/admin.png">
 <a href="admin/admin.php"><img src="images/admincenter.png" data-hover="images/admincenterhover.png"></a>
 <?php
 }
 ?>
-<a href="process.php"><img src="images/logout.png" data-hover="images/logouthover.png"></a>
 
 <img src="images/student.png">
 <a href="contractcreation.php"><img src="images/contractcreation.png" data-hover="images/contractcreationhover.png"></a>
 <a href="studentinfo.php"><img src="images/myinformation.png" data-hover="images/myinformationhover.png"></a>
 <a href="evalform.php"><img src="images/evaluation.png" data-hover="images/evaluationhover.png"></a>
 <a href="contractaccept.php"><img src="images/contracts.png" data-hover="images/contractshover.png"></a>
-<table bgcolor="#000000" width=100% height=15px><tr><td></td></tr></table>
 <?php
 }else{
 ?>
@@ -119,7 +120,6 @@ if($session->userlevel==9){
 <a href="studentinfo.php"><img src="images/myinformation.png" data-hover="images/myinformationhover.png"></a>
 <a href="evalform.php"><img src="images/evaluation.png" data-hover="images/evaluationhover.png"></a>
 <a href="contractaccept.php"><img src="images/contracts.png" data-hover="images/contractshover.png"></a>
-<table bgcolor="#000000" width=100% height=15px><tr><td></td></tr></table>
 
 <?php
 }

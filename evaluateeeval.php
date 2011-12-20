@@ -1,6 +1,10 @@
 <?php
 include('includes/header.php');
-
+if(isset($_POST['Submit'])){
+$query="UPDATE users SET Progress=4 WHERE STUDENT_ID=" . $_POST['student_id'];
+$result=mysql_query($query) or die(mysql_error());
+popup("You have made this evaluation visible.");
+}
 
 $student_id=$_GET['studentid'];
 $query="SELECT GROUP_ID FROM users WHERE STUDENT_ID=". $student_id;
@@ -30,7 +34,7 @@ if($session->logged_in)
             else
               $page="evalprocess.php";
 		      
-		      echo "<form action=$page method=\"POST\">";?>
+		      echo "<form action=evaluateeeval?studentid=" . $student_id . " method=\"POST\">";?>
 			  
       	    
             <?php 
@@ -84,6 +88,7 @@ if($session->logged_in){
 	
 	// get data that sent from form
 	$user_id=$student_id;
+	echo'<input type="hidden" value="'.$student_id.'" name="student_id" />';
 	
 	//STUDENT FIRST NAME LAST NAME
 	$query_student_id = "SELECT fname,lname FROM users WHERE STUDENT_ID ='$user_id'"; //pull student id from user_id
@@ -600,7 +605,7 @@ echo "You do not have access to this page.";
 }
  ?>
             </br>
-            <input type="submit" value="Send!" name="Submit"/>
+            <input type="submit" value="Make Visible!" name="Submit"/>
           </form>
         </body>
 
